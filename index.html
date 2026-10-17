@@ -1,0 +1,1487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KitBench: robotics, embedded and VLSI project kits</title>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F2F5F3;--sf:#FFFFFF;--ink:#10201E;--mute:#58706A;--line:#D3DEDA;--gold:#C99700;--r:#2457C5;--e:#0E5A4F;--v:#6A3FB5;color-scheme:light;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0F1715;--sf:#17221F;--ink:#E6EFEC;--mute:#93A8A2;--line:#2A3A36;--gold:#E0B22E;--r:#8DB0FF;--e:#5CC4AE;--v:#B79BFF;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0F1715;--sf:#17221F;--ink:#E6EFEC;--mute:#93A8A2;--line:#2A3A36;--gold:#E0B22E;--r:#8DB0FF;--e:#5CC4AE;--v:#B79BFF;color-scheme:dark}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 "Instrument Sans",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque","Instrument Sans",system-ui,sans-serif;line-height:1.1;margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+header{display:flex;align-items:center;justify-content:space-between;padding:18px 0}
+.logo{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:22px}
+.cartbtn{background:var(--ink);color:var(--bg);border:0;border-radius:999px;padding:9px 18px;font-weight:600}
+.hero{padding:28px 0 8px}
+.hero h1{font-size:clamp(34px,6vw,60px);font-weight:800;max-width:15ch}
+.hero p{color:var(--mute);max-width:52ch;margin:14px 0 0;font-size:18px}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:28px 0 14px}
+.tab{background:var(--sf);border:2px solid var(--line);border-radius:14px;padding:14px;text-align:left}
+.tab b{display:block;font-family:"Bricolage Grotesque",sans-serif;font-size:19px}
+.tab span{color:var(--mute);font-size:14px}
+.tab[aria-pressed="true"]{border-color:var(--ink);box-shadow:inset 0 -5px 0 var(--c,var(--ink))}
+.lvls{display:flex;gap:8px;flex-wrap:wrap;margin:6px 0 22px}
+.chip{background:transparent;border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-size:14px}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(285px,1fr));gap:18px;padding-bottom:60px}
+.card{background:var(--sf);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.art{display:block;width:100%;height:120px}
+.cb{padding:16px;display:flex;flex-direction:column;gap:8px;flex:1}
+.cb h3{font-size:20px}
+.meta{color:var(--mute);font-size:14px}
+.cb p{margin:0;color:var(--mute);font-size:15px}
+.row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:10px}
+.price{font-family:"Bricolage Grotesque",sans-serif;font-weight:800;font-size:22px}
+.btns{display:flex;gap:8px}
+.b1,.b2{border-radius:10px;padding:8px 14px;font-weight:600;font-size:14px}
+.b1{background:var(--ink);color:var(--bg);border:0}
+.b2{background:transparent;border:1px solid var(--line)}
+dialog{border:0;border-radius:16px;padding:0;max-width:560px;width:calc(100% - 32px);background:var(--sf);color:var(--ink)}
+dialog::backdrop{background:rgba(0,0,0,.5)}
+.dm{padding:24px;display:grid;gap:14px}
+.dm h2{font-size:28px}
+.dm h3{font-size:16px;margin-bottom:4px}
+.dm ul{margin:0;padding-left:20px;color:var(--mute)}
+.x{justify-self:end;background:none;border:1px solid var(--line);border-radius:8px;padding:4px 10px}
+aside{position:fixed;top:0;right:0;bottom:0;width:min(380px,100%);background:var(--sf);border-left:1px solid var(--line);padding:calc(18px + env(safe-area-inset-top,0px)) 20px calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(105%);transition:transform .25s;display:flex;flex-direction:column;gap:12px;z-index:20}
+aside.open{transform:none}
+.items{flex:1;overflow:auto;display:grid;gap:12px;align-content:start}
+.it{display:grid;grid-template-columns:1fr auto;gap:2px 10px;border-bottom:1px solid var(--line);padding-bottom:10px}
+.qty{display:flex;align-items:center;gap:8px}
+.qty button{width:28px;height:28px;border-radius:8px;border:1px solid var(--line);background:none}
+.tot{display:flex;justify-content:space-between;font-weight:600;font-size:18px}
+.note{color:var(--mute);font-size:14px;min-height:42px;margin:0}
+.f{display:grid;gap:4px;font-size:14px;color:var(--mute)}.f input,.f textarea{padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}
+ 
+.brand-mark{display:inline-grid;place-items:center;background:var(--gold);color:#10201E;border-radius:9px;width:25px;height:25px;font-size:15px;vertical-align:middle}
+.brand-sub{display:block;font:600 9px/1.4 "Instrument Sans",sans-serif;letter-spacing:2px;color:var(--mute);margin-top:3px}
+.head-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.utility-btn{background:var(--sf);border:1px solid var(--line);border-radius:999px;padding:9px 13px;font-size:13px;font-weight:600}
+.search-tools{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:8px 0 10px}
+.search-tools input{flex:1;min-width:220px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--sf);color:var(--ink);font:inherit}
+.sort-label{display:flex;align-items:center;gap:8px;color:var(--mute);font-size:13px}
+.sort-label select{padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--sf);color:var(--ink);font:inherit}
+.feature-strip{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:22px 0 24px}
+.feature-strip>div{padding:15px 17px;border:1px solid var(--line);border-radius:14px;background:linear-gradient(135deg,var(--sf),var(--bg))}
+.feature-strip b,.feature-strip span{display:block}.feature-strip b{font-size:15px}.feature-strip span{font-size:12px;color:var(--mute);margin-top:3px}
+.save-btn{position:absolute;top:10px;right:10px;border:1px solid var(--line);border-radius:999px;background:var(--sf);color:var(--ink);padding:7px 10px;font-size:13px;box-shadow:0 2px 8px #0000000d}
+.card{position:relative;transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 28px #10201e12;border-color:var(--mute)}
+.art{height:145px}
+.b1,.b2,.cartbtn,.utility-btn,.tab,.chip{transition:transform .15s ease,opacity .15s ease}
+.b1:hover,.cartbtn:hover,.utility-btn:hover,.tab:hover,.chip:hover{transform:translateY(-1px)}
+.hero{padding:38px 0 10px}
+.hero:before{content:"STUDENT PROJECT MARKETPLACE";display:inline-block;font-size:11px;letter-spacing:2px;font-weight:800;color:var(--e);margin-bottom:13px}
+.hero p{line-height:1.7}
+@media(max-width:720px){.tabs{grid-template-columns:1fr 1fr}.feature-strip{grid-template-columns:1fr}.search-tools input{min-width:100%}.sort-label{flex:1}.sort-label select{flex:1;min-width:0}.head-actions{gap:5px}.utility-btn{padding:8px 10px}.brand-sub{letter-spacing:1px}}
+
+@media (prefers-reduced-motion:reduce){aside{transition:none}}
+/* Professional responsive polish */
+body{background:radial-gradient(ellipse at 8% 0%,color-mix(in srgb,var(--e) 9%,transparent),transparent 38%),var(--bg)}
+.wrap{max-width:1160px}
+header{position:sticky;top:0;z-index:15;margin:0 -20px;padding:14px 20px;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(16px);border-bottom:1px solid color-mix(in srgb,var(--line) 75%,transparent)}
+.logo{letter-spacing:-.7px}.logo:before{content:"⌁";display:inline-grid;place-items:center;width:32px;height:32px;margin-right:9px;border-radius:10px;background:var(--ink);color:var(--bg);font-size:23px;vertical-align:-3px}
+.cartbtn,.b1{transition:transform .18s,opacity .18s,box-shadow .18s}.cartbtn:hover,.b1:hover{transform:translateY(-1px);box-shadow:0 7px 18px #10201e20}
+.hero{padding:54px 0 20px}.hero h1{letter-spacing:-1.7px;max-width:780px}.hero p{line-height:1.7}
+.tabs{gap:12px}.tab{padding:18px;border-radius:16px;transition:border-color .18s,transform .18s,box-shadow .18s}.tab:hover{transform:translateY(-2px);box-shadow:0 8px 22px #10201e0b}.tab b{letter-spacing:-.3px}
+#q{min-height:46px;outline-offset:3px}.lvls{margin-top:16px;margin-bottom:24px}.chip{padding:8px 15px;transition:background .15s}
+.grid{gap:20px}.card{border-radius:18px;box-shadow:0 4px 18px #10201e08;transition:transform .2s,box-shadow .2s,border-color .2s}.card:hover{transform:translateY(-3px);box-shadow:0 14px 32px #10201e12;border-color:color-mix(in srgb,var(--mute) 40%,var(--line))}.art{height:140px}.cb{padding:19px}.cb h3{letter-spacing:-.35px}.price{letter-spacing:-.5px}.b1,.b2{padding:9px 13px}.b2:hover{background:var(--bg)}
+dialog{box-shadow:0 24px 90px #0003}dialog .dm{max-height:min(85vh,760px);overflow:auto}aside{box-shadow:-18px 0 50px #00000012}button:disabled{opacity:.45;cursor:not-allowed}
+@media(max-width:520px){.wrap{padding:0 14px}header{margin:0 -14px;padding:12px 14px}.hero{padding-top:36px}.hero h1{letter-spacing:-1px}.tab{padding:13px}.tab b{font-size:17px}.grid{grid-template-columns:1fr}.btns{gap:6px}}
+
+/* KitBench all-in-one student tools */
+.feature-nav{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0 26px}.feature-nav button{border:1px solid var(--line);background:var(--sf);color:var(--ink);border-radius:12px;padding:10px 13px;font:inherit;font-size:13px;cursor:pointer}.feature-nav button:hover{border-color:var(--e);transform:translateY(-1px)}
+.tool-panel{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 0 28px}.tool-card{border:1px solid var(--line);background:var(--sf);border-radius:16px;padding:18px}.tool-card h3{margin:0 0 7px;font-size:16px}.tool-card p{color:var(--mute);font-size:13px;line-height:1.55;margin:0 0 13px}.tool-card button,.tool-action{border:0;border-radius:9px;padding:10px 12px;background:var(--ink);color:var(--bg);font:inherit;font-size:13px;cursor:pointer}.feature-modal{width:min(700px,calc(100% - 24px));max-height:88vh;border:1px solid var(--line);border-radius:18px;background:var(--sf);color:var(--ink);padding:24px}.feature-modal::backdrop{background:#06110f99;backdrop-filter:blur(3px)}.feature-modal h2{margin-top:0}.feature-modal label{display:grid;gap:6px;font-size:13px;color:var(--mute);margin:10px 0}.feature-modal input,.feature-modal select,.feature-modal textarea{width:100%;padding:11px;border:1px solid var(--line);border-radius:9px;background:var(--bg);color:var(--ink);font:inherit}.feature-modal .close-feature{float:right;border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:8px;padding:7px 10px;cursor:pointer}.feature-list{display:grid;gap:10px}.feature-row{padding:13px;border:1px solid var(--line);border-radius:12px}.feature-row p{margin:6px 0;color:var(--mute);font-size:13px}.muted-note{font-size:12px;color:var(--mute);line-height:1.55}.lesson-step{padding:12px;background:var(--bg);border-radius:10px;margin:8px 0}.coupon-line{display:flex;gap:8px;flex-wrap:wrap}.coupon-line input{flex:1;min-width:140px}.star-rating{color:#d69e00;letter-spacing:2px}.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}@media(max-width:720px){.tool-panel{grid-template-columns:1fr}.admin-grid{grid-template-columns:1fr}.feature-modal{padding:17px}}
+
+
+
+.live-location-btn{display:block;margin:6px 0 0;padding:0;border:0;background:transparent;color:var(--e);font:600 12px/1.35 "Instrument Sans",sans-serif;text-align:left;cursor:pointer;max-width:260px}
+.live-location-btn:hover{text-decoration:underline}
+.live-location-status{display:block;margin-top:2px;color:var(--mute);font:500 10px/1.35 "Instrument Sans",sans-serif;letter-spacing:0;max-width:280px;white-space:normal}
+.live-location-btn:disabled{opacity:.7;cursor:wait}
+@media(max-width:720px){.live-location-status{max-width:220px}.live-location-btn{font-size:11px}}
+
+/* Header sign-up, profile avatar and home delivery location */
+.header-left{display:flex;align-items:center;gap:14px;min-width:0}.header-left .logo{white-space:nowrap}
+.signup-top{border:0;border-radius:999px;padding:10px 15px;background:var(--e);color:#fff;font-weight:700;font-size:13px;white-space:nowrap}
+.profile-avatar-btn{display:flex;align-items:center;gap:7px;border:1px solid var(--line);border-radius:999px;padding:4px 10px 4px 4px;background:var(--sf);color:var(--ink);font-size:13px;font-weight:600;white-space:nowrap}
+.profile-avatar-img{width:34px;height:34px;object-fit:cover;border-radius:50%;display:block;background:var(--bg);border:1px solid var(--line)}
+.location-home{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:10px 0 18px;padding:14px 16px;border:1px solid var(--line);border-radius:14px;background:var(--sf)}
+.location-home .location-label{font-weight:700;white-space:nowrap}.location-home input{flex:1;min-width:190px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:var(--bg);color:var(--ink);font:inherit}.location-home button{border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:10px;padding:10px 13px;font-weight:600}.location-status{font-size:12px;color:var(--mute);width:100%;margin:0}
+.profile-photo-row{display:flex;align-items:center;gap:14px;margin:10px 0 16px}.profile-photo-preview{width:76px;height:76px;border-radius:50%;object-fit:cover;border:2px solid var(--line);background:var(--bg)}
+@media(max-width:720px){header{align-items:flex-start;gap:10px}.header-left{gap:8px;flex-wrap:wrap}.header-left .logo{font-size:19px}.signup-top{padding:8px 11px}.head-actions{justify-content:flex-end}.profile-avatar-btn span{display:none}.profile-avatar-btn{padding:3px}.profile-avatar-img{width:32px;height:32px}}
+@media(max-width:520px){header{flex-wrap:wrap}.header-left{width:100%;justify-content:space-between}.head-actions{width:100%;justify-content:flex-end}.location-home{align-items:stretch}.location-home .location-label{width:100%}.location-home input{min-width:0;width:100%}}
+
+
+/* ===== KitBench v3: robot-first intro + colourful icons ===== */
+:root{--acc1:#14B8A6;--acc2:#6366F1;--acc3:#F59E0B;--acc4:#EC4899;--grad:linear-gradient(120deg,#14B8A6,#6366F1 60%,#EC4899)}
+.ico{width:1.15em;height:1.15em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex:none}
+.tile{display:inline-grid;place-items:center;flex:none;width:30px;height:30px;border-radius:10px;color:#fff;font-size:16px;font-style:normal;background:linear-gradient(135deg,var(--a,#14B8A6),var(--b,#0E5A4F));box-shadow:0 5px 12px color-mix(in srgb,var(--b,#0E5A4F) 38%,transparent),inset 0 1px 0 #ffffff55;transition:transform .2s}
+button:hover>.tile,.tool-card:hover .tile,.feature-strip>div:hover .tile{transform:rotate(-8deg) scale(1.1)}
+
+/* intro stage: dark veil, parts checklist */
+#kbVeil{position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(ellipse at 50% 38%,#14403a 0%,#071412 58%,#030807 100%);transition:opacity 1.1s ease}
+#kbParts{position:fixed;left:24px;top:50%;transform:translateY(-50%);z-index:50;width:210px;padding:16px 16px 12px;border:1px solid #58d6bd55;border-radius:16px;background:#071412cc;backdrop-filter:blur(8px);color:#e6efec;font:500 14px/1.3 "Instrument Sans",system-ui,sans-serif;pointer-events:none}
+#kbParts b{display:block;margin-bottom:10px;font:800 16px "Bricolage Grotesque",system-ui,sans-serif;color:#58d6bd}
+#kbParts ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+#kbParts li{display:flex;align-items:center;gap:10px;opacity:.45;transition:opacity .4s,color .4s}
+#kbParts li:before{content:"";width:11px;height:11px;border-radius:50%;border:2px solid #58d6bd;transition:background .4s,box-shadow .4s}
+#kbParts li.on{opacity:1;color:#fff}
+#kbParts li.on:before{background:#58d6bd;box-shadow:0 0 10px #58d6bd}
+@media(max-width:700px){#kbParts{left:10px;right:10px;top:10px;width:auto;transform:none;padding:10px 12px}#kbParts b{display:none}#kbParts ul{grid-template-columns:repeat(2,1fr);gap:5px 10px;font-size:12px}}
+
+/* header */
+.logo:before{background:var(--grad);color:#fff;box-shadow:0 6px 16px color-mix(in srgb,var(--acc2) 35%,transparent)}
+.brand-mark{background:linear-gradient(135deg,#FDE047,#F59E0B);box-shadow:0 3px 8px #f59e0b55}
+.utility-btn,.profile-avatar-btn{display:inline-flex;align-items:center;gap:8px;padding:5px 14px 5px 5px}
+.utility-btn .tile{width:25px;height:25px;border-radius:8px;font-size:13px}
+#savedbtn[aria-pressed="true"]{border-color:#E11D48;background:color-mix(in srgb,#E11D48 10%,var(--sf))}
+.cartbtn{display:inline-flex;align-items:center;gap:8px;background:var(--grad);color:#fff;box-shadow:0 8px 20px color-mix(in srgb,var(--acc2) 32%,transparent)}
+.signup-top{background:linear-gradient(135deg,#14B8A6,#2457C5)}
+
+/* hero */
+.hero h1 .w{background:linear-gradient(currentColor,currentColor) 0 94%/100% 5px no-repeat;padding-bottom:3px}
+.hero h1 .w-r{color:var(--r)}.hero h1 .w-e{color:var(--e)}.hero h1 .w-v{color:var(--v)}
+.hero:before{padding:6px 13px;border-radius:999px;background:color-mix(in srgb,var(--e) 14%,transparent);border:1px solid color-mix(in srgb,var(--e) 32%,transparent)}
+.location-label{display:inline-flex;align-items:center;gap:9px}
+.location-home button{background:linear-gradient(135deg,#14B8A6,#2457C5);color:#fff;border:0}
+
+/* category tabs + level chips */
+.tab{background:linear-gradient(160deg,var(--sf),color-mix(in srgb,var(--c,var(--acc3)) 8%,var(--sf)))}
+.tab .tile{display:grid;width:38px;height:38px;border-radius:12px;font-size:20px;margin-bottom:10px}
+.tab[aria-pressed="true"]{border-color:var(--c,var(--acc3));background:color-mix(in srgb,var(--c,var(--acc3)) 12%,var(--sf));box-shadow:inset 0 -5px 0 var(--c,var(--acc3)),0 10px 24px color-mix(in srgb,var(--c,var(--acc3)) 22%,transparent)}
+.chip{display:inline-flex;align-items:center;gap:7px;background:var(--sf)}
+.chip .dot{width:9px;height:9px;border-radius:50%}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+
+/* feature strip, student tools, tool cards */
+.feature-strip>div{display:grid;grid-template-columns:auto 1fr;column-gap:14px;align-items:center;border-top:3px solid var(--a,var(--acc1))}
+.feature-strip>div .tile{grid-row:1/3;width:40px;height:40px;border-radius:13px;font-size:21px}
+.feature-nav button{display:inline-flex;align-items:center;gap:9px;padding:6px 15px 6px 6px;border-radius:999px;font-weight:600}
+.feature-nav button .tile{width:26px;height:26px;border-radius:9px;font-size:14px}
+.feature-nav button:hover{border-color:var(--a,var(--e));box-shadow:0 6px 16px color-mix(in srgb,var(--b,var(--e)) 22%,transparent)}
+.tool-card{position:relative;transition:transform .2s,box-shadow .2s,border-color .2s}
+.tool-card:hover{transform:translateY(-3px);border-color:var(--a,var(--e));box-shadow:0 14px 30px color-mix(in srgb,var(--b,var(--e)) 20%,transparent)}
+.tool-card h3{display:flex;align-items:center;gap:11px;font-size:17px}
+.tool-card h3 .tile{width:34px;height:34px;border-radius:11px;font-size:18px}
+.tool-card button,.tool-action{background:linear-gradient(135deg,var(--a,#14B8A6),var(--b,#0E5A4F));color:#fff;font-weight:600}
+
+/* kit cards: category colour carries meaning */
+.card{border-top:4px solid var(--c,var(--acc1))}
+.card:hover{border-color:var(--c,var(--acc1));box-shadow:0 16px 34px color-mix(in srgb,var(--c,var(--acc1)) 22%,transparent)}
+.b1{background:linear-gradient(135deg,var(--k,#0E7C6B),color-mix(in srgb,var(--k,#0E7C6B) 62%,#EC4899));color:#fff}
+.save-btn{backdrop-filter:blur(6px)}
+.save-btn.on{color:#E11D48;border-color:#E11D48;background:color-mix(in srgb,#E11D48 9%,var(--sf))}
+.art{border-bottom:1px solid var(--line);overflow:visible;transform:translateZ(0);transition:transform .35s cubic-bezier(.2,.8,.2,1),filter .35s;filter:drop-shadow(0 4px 5px #0f172a0a)}
+.card:hover .art{transform:perspective(700px) rotateX(3deg) rotateY(-3deg) translateY(-2px) scale(1.025);filter:drop-shadow(0 10px 8px #0f172a20)}
+@media(prefers-reduced-motion:reduce){.art,.card:hover .art{transition:none;transform:none}}
+
+/* the one reveal: home opens after the robot finishes */
+@keyframes kbRise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+html.kb-reveal .hero{animation:kbRise .9s cubic-bezier(.2,.7,.2,1) backwards}
+@media(prefers-reduced-motion:reduce){html.kb-reveal .hero{animation:none}}
+
+/* home-only icon rails: left = areas, right = student tools */
+.kb-rail{position:fixed;top:50%;transform:translateY(-50%);z-index:12;display:flex;flex-direction:column;gap:14px;transition:opacity .4s}
+#kbRailL{left:14px}#kbRailR{right:14px}
+.kb-rail button{position:relative;display:grid;place-items:center;width:54px;height:54px;padding:0;border-radius:17px;border:1px solid var(--line);background:color-mix(in srgb,var(--sf) 80%,transparent);backdrop-filter:blur(8px);transition:transform .18s,box-shadow .18s,border-color .18s}
+.kb-rail button:hover{transform:scale(1.08)}
+.kb-rail .tile{width:38px;height:38px;border-radius:13px;font-size:21px}
+.kb-rail button[aria-pressed="true"]{border-color:var(--a);box-shadow:0 0 0 3px color-mix(in srgb,var(--a) 32%,transparent),0 10px 24px color-mix(in srgb,var(--b) 35%,transparent)}
+.kb-rail button::after{content:attr(data-label);position:absolute;top:50%;transform:translateY(-50%);padding:6px 11px;border-radius:9px;background:var(--ink);color:var(--bg);font:600 12px "Instrument Sans",system-ui,sans-serif;white-space:nowrap;opacity:0;pointer-events:none;transition:opacity .15s}
+#kbRailL button::after{left:calc(100% + 10px)}#kbRailR button::after{right:calc(100% + 10px)}
+.kb-rail button:hover::after,.kb-rail button:focus-visible::after{opacity:1}
+.kb-rail.away,.kb-scene-name.away{opacity:0;pointer-events:none}
+.kb-scene-name{position:fixed;bottom:18px;left:50%;transform:translateX(-50%);z-index:12;padding:7px 16px;border-radius:999px;background:color-mix(in srgb,var(--sf) 82%,transparent);border:1px solid var(--line);backdrop-filter:blur(8px);font:700 13px "Bricolage Grotesque",system-ui,sans-serif;letter-spacing:.04em;transition:opacity .4s;pointer-events:none}
+html.kb-intro .kb-rail,html.kb-intro .kb-scene-name{opacity:0}
+.kb-panel{position:fixed;top:50%;transform:translateY(-50%);z-index:11;width:290px;max-height:78vh;overflow:auto;padding:18px;border-radius:18px;border:1px solid var(--line);background:color-mix(in srgb,var(--sf) 86%,transparent);backdrop-filter:blur(14px);box-shadow:0 18px 50px #0003;transition:opacity .3s}
+.kb-panel.L{left:84px}.kb-panel.R{right:84px}
+.kb-panel[hidden]{display:none}.kb-panel.away{opacity:0;pointer-events:none}
+.kb-panel h3{font-size:20px;margin:0 0 4px;display:flex;align-items:center;gap:10px}
+.kb-panel p{margin:0 0 12px;color:var(--mute);font-size:13px;line-height:1.5}
+.kb-panel .kbp-x{position:absolute;top:10px;right:10px;border:1px solid var(--line);background:transparent;border-radius:8px;padding:2px 8px;font-size:12px}
+.kb-panel .kbp-list{display:grid;gap:8px;margin:0 0 12px}
+.kb-panel .kbp-list button,.kb-panel .kbp-chips button{text-align:left;border:1px solid var(--line);background:var(--bg);border-radius:10px;padding:9px 11px;font-size:13px;font-weight:600;display:flex;justify-content:space-between;gap:8px;width:100%}
+.kb-panel .kbp-list button:hover,.kb-panel .kbp-chips button:hover{border-color:var(--pc,var(--e))}
+.kb-panel .kbp-list small{color:var(--mute);font-weight:500}
+.kb-panel .kbp-chips{display:grid;gap:8px;margin:0 0 12px}
+.kb-panel .kbp-go{width:100%;border:0;border-radius:11px;padding:11px;font-weight:700;color:#fff;background:linear-gradient(135deg,var(--pa,#14B8A6),var(--pc,#0E5A4F))}
+.kb-panel .kbp-h{font:700 12px "Instrument Sans",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--mute);margin:4px 0 8px}
+@media(max-width:700px){.kb-panel{top:auto;bottom:62px;left:10px!important;right:10px!important;width:auto;transform:none;max-height:46vh}}
+@media(max-width:700px){.kb-rail{gap:10px}#kbRailL{left:6px}#kbRailR{right:6px}.kb-rail button{width:42px;height:42px;border-radius:13px}.kb-rail .tile{width:30px;height:30px;font-size:17px}.kb-rail button::after{display:none}}
+</style>
+<script>try{if(!matchMedia("(prefers-reduced-motion: reduce)").matches&&innerWidth>=700&&!(navigator.deviceMemory&&navigator.deviceMemory<=4))document.documentElement.classList.add("kb-intro")}catch(e){}</script><style>html.kb-intro{overflow:hidden}html.kb-intro body>*:not(#kbBg):not(#kbSkip):not(#kbIntroTxt):not(#kbParts):not(#kbVeil){opacity:0!important;pointer-events:none}body>*:not(#kbBg){transition:opacity 1s ease}#kbSkip{position:fixed;bottom:22px;left:50%;transform:translateX(-50%);z-index:50;padding:10px 18px;border-radius:999px;border:1px solid #58d6bd;background:#0f1715cc;color:#e6efec;font:600 14px system-ui,sans-serif;cursor:pointer}#kbIntroTxt{position:fixed;bottom:76px;left:0;right:0;text-align:center;z-index:50;color:#58d6bd;font:600 13px system-ui,sans-serif;letter-spacing:.22em;text-transform:uppercase;pointer-events:none}#kbBg{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;transition:opacity .3s}[data-theme="light"] #kbBg{filter:saturate(.9) brightness(.92)}
+/* User-requested cleanup: remove location UI and duplicate tools below side rails */
+.location-home,
+.feature-nav,
+.tool-panel{display:none!important}
+
+/* Polished KitBench header controls */
+header{gap:12px!important;padding:14px 18px!important;border:1px solid color-mix(in srgb,var(--e) 22%,var(--line))!important;border-radius:0 0 22px 22px!important;background:color-mix(in srgb,var(--sf) 88%,transparent)!important;backdrop-filter:blur(18px);box-shadow:0 12px 32px #06110f12}
+.head-actions{gap:8px!important;align-items:center;flex-wrap:wrap}
+.head-actions .utility-btn,.head-actions .profile-avatar-btn,.head-actions .cartbtn{min-height:42px;border-radius:14px!important;padding:6px 12px!important;border:1px solid color-mix(in srgb,var(--e) 20%,var(--line));background:linear-gradient(145deg,var(--sf),color-mix(in srgb,var(--e) 5%,var(--sf)));box-shadow:0 5px 14px #06110f10;transition:transform .2s,box-shadow .2s,border-color .2s}
+.head-actions .utility-btn:hover,.head-actions .profile-avatar-btn:hover,.head-actions .cartbtn:hover,.signup-top:hover{transform:translateY(-2px);box-shadow:0 9px 22px #06110f20;border-color:var(--e)}
+.profile-avatar-btn{padding:4px 13px 4px 5px!important;font-weight:750!important}
+.profile-avatar-img{border:2px solid var(--e)!important;box-shadow:0 0 0 3px color-mix(in srgb,var(--e) 15%,transparent)}
+#themebtn .tile{background:linear-gradient(135deg,#8B5CF6,#4F46E5)!important}
+#savedbtn .tile{background:linear-gradient(135deg,#FB7185,#E11D48)!important}
+#savedbtn[aria-pressed="true"]{background:linear-gradient(135deg,#FFF1F2,color-mix(in srgb,#FB7185 15%,var(--sf)))!important;color:#BE123C!important}
+.signup-top{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:10px 17px!important;border-radius:14px!important;background:linear-gradient(120deg,#14B8A6,#2563EB 60%,#9333EA)!important;color:#fff!important;box-shadow:0 7px 18px #2563eb33;font-weight:800!important;transition:transform .2s,box-shadow .2s}
+.live-location-btn{display:inline-flex!important;align-items:center;gap:6px;margin:5px 0 0!important;padding:6px 10px!important;border:1px solid color-mix(in srgb,#38BDF8 45%,var(--line))!important;border-radius:999px!important;background:linear-gradient(135deg,color-mix(in srgb,#38BDF8 13%,var(--sf)),color-mix(in srgb,#14B8A6 10%,var(--sf)))!important;color:var(--ink)!important;font-size:11px!important;font-weight:750!important;max-width:none!important}
+.live-location-status{display:block!important;font-size:10px!important;opacity:.78}
+/* Individual project-themed animated badge on every project illustration */
+.project-scene{position:relative;isolation:isolate;overflow:hidden;border-radius:15px;margin-bottom:2px}
+.project-scene .art{display:block;width:100%;transition:transform .45s cubic-bezier(.2,.8,.2,1),filter .45s}
+.card:hover .project-scene .art{transform:perspective(700px) rotateX(4deg) rotateY(-4deg) scale(1.045);filter:saturate(1.16)}
+.project-anime{position:absolute;right:14px;top:12px;width:45px;height:45px;display:grid;place-items:center;border-radius:15px;font-size:23px;background:linear-gradient(145deg,#ffffffed,#dbeafea8);border:1px solid #ffffffcc;box-shadow:0 8px 18px #0f172a30;animation:projectFloat 2.7s ease-in-out infinite;transform-origin:center}
+.project-anime:before{content:"";position:absolute;inset:-6px;border:1px solid color-mix(in srgb,var(--c) 70%,transparent);border-radius:19px;animation:projectPulse 2.2s ease-out infinite;pointer-events:none}
+.project-anime:after{content:"✦";position:absolute;right:-7px;top:-8px;color:var(--c);font-size:13px;animation:projectSpark 2s ease-in-out infinite}
+.project-scene .scene-caption{position:absolute;left:10px;bottom:8px;max-width:70%;padding:5px 9px;border:1px solid color-mix(in srgb,var(--c) 30%,transparent);border-radius:999px;background:color-mix(in srgb,var(--sf) 82%,transparent);backdrop-filter:blur(8px);color:var(--ink);font-size:10px;font-weight:800;letter-spacing:.04em}
+@keyframes projectFloat{0%,100%{transform:translateY(0) rotate(-4deg)}50%{transform:translateY(-7px) rotate(5deg)}}
+@keyframes projectPulse{0%{transform:scale(.82);opacity:.85}100%{transform:scale(1.3);opacity:0}}
+@keyframes projectSpark{0%,100%{transform:scale(.7) rotate(0);opacity:.6}50%{transform:scale(1.25) rotate(35deg);opacity:1}}
+@media(prefers-reduced-motion:reduce){.project-anime,.project-anime:before,.project-anime:after{animation:none!important}.card:hover .project-scene .art{transform:none}}
+@media(max-width:720px){header{padding:12px!important}.head-actions{gap:6px!important}.head-actions .utility-btn,.head-actions .profile-avatar-btn,.head-actions .cartbtn{font-size:12px;padding:5px 8px!important}.header-left{align-items:center}.live-location-status{max-width:240px}}
+
+
+/* KitBench animated robotics / embedded / VLSI assembly introduction */
+.kb-maker-intro{position:relative;display:grid;grid-template-columns:minmax(260px,.85fr) minmax(320px,1.15fr);align-items:center;gap:18px;overflow:hidden;margin:18px 0 16px;padding:clamp(20px,3vw,34px);border:1px solid color-mix(in srgb,#22d3ee 35%,var(--line));border-radius:26px;background:radial-gradient(ellipse at 75% 45%,#0e749044,transparent 48%),linear-gradient(125deg,#071b2c,#102a43 55%,#17133a);color:#effaff;box-shadow:0 20px 48px #071b2c22;isolation:isolate}
+.kb-maker-intro:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.2;background-image:linear-gradient(#67e8f933 1px,transparent 1px),linear-gradient(90deg,#67e8f933 1px,transparent 1px);background-size:28px 28px;mask-image:linear-gradient(90deg,transparent,#000)}
+.kb-intro-copy{position:relative;z-index:3}.kb-eyebrow{font-size:11px;letter-spacing:.2em;font-weight:900;color:#67e8f9}.kb-intro-copy h2{max-width:14ch;margin:12px 0;font-size:clamp(27px,3.5vw,43px);line-height:1.08;font-weight:900;letter-spacing:-.04em}.kb-intro-copy h2 i{font-style:normal;background:linear-gradient(90deg,#67e8f9,#a5b4fc,#f0abfc);-webkit-background-clip:text;background-clip:text;color:transparent}.kb-intro-copy p{max-width:47ch;color:#c8dce9;line-height:1.65;font-size:14px}.kb-domain-pills{display:flex;gap:7px;flex-wrap:wrap;margin-top:17px}.kb-domain-pills span{padding:7px 10px;border:1px solid #a5f3fc40;border-radius:999px;background:#ffffff0c;font-size:11px;font-weight:800;color:#e0f2fe}
+.kb-assembly{position:relative;min-height:260px;overflow:hidden;border-radius:20px;background:radial-gradient(ellipse at 60% 58%,#0ea5e933,transparent 56%);perspective:800px}.kb-board{position:absolute;left:29%;right:2%;bottom:25px;height:120px;transform:rotateX(58deg) rotateZ(-9deg);border:2px solid #34d399;border-radius:10px;background:linear-gradient(135deg,#166534,#064e3b 70%);box-shadow:0 18px 24px #02061780,inset 0 0 0 7px #a7f3d033;overflow:hidden}.kb-board-traces{position:absolute;inset:8px;background:repeating-linear-gradient(0deg,transparent 0 13px,#a7f3d044 14px 16px,transparent 17px 25px),repeating-linear-gradient(90deg,transparent 0 20px,#6ee7b744 21px 23px,transparent 24px 35px)}.kb-board-chip{position:absolute;left:44%;top:27%;width:49px;height:49px;display:grid;place-items:center;border:3px solid #e2e8f0;border-radius:7px;background:linear-gradient(135deg,#64748b,#111827);box-shadow:0 0 0 5px #0f172a55,0 0 20px #67e8f9;transform:translateY(0) scale(.85);animation:kbChipSeat 6s ease-in-out infinite}.kb-board-chip span{font-size:12px;font-weight:900;color:#67e8f9}.kb-board-chip i{position:absolute;inset:-7px;border:1px dashed #fef08a;border-radius:8px}.kb-board-label{position:absolute;right:8px;bottom:6px;color:#a7f3d0;font-size:8px;letter-spacing:.16em}.kb-board-led{position:absolute;width:7px;height:7px;border-radius:50%;background:#86efac;box-shadow:0 0 12px #4ade80;animation:kbLedBlink 1.1s infinite}.led-a{left:13%;top:22%}.led-b{left:21%;top:68%;animation-delay:.3s}.led-c{right:14%;top:20%;animation-delay:.6s}.kb-chip-tray{position:absolute;left:5%;bottom:32px;width:90px;height:52px;display:grid;place-items:center;border:1px solid #93c5fd55;border-radius:12px;background:linear-gradient(145deg,#334155,#0f172a);box-shadow:0 10px 20px #02061766}.kb-chip-tray small{position:absolute;bottom:5px;font-size:7px;letter-spacing:.16em;color:#cbd5e1}.kb-loose-chip{position:absolute;top:-18px;left:29px;width:29px;height:29px;display:grid;place-items:center;border:2px solid #fef08a;border-radius:5px;background:linear-gradient(135deg,#facc15,#a16207);color:#fff;font-size:9px;font-weight:900;box-shadow:0 0 16px #facc1580;animation:kbChipLift 6s ease-in-out infinite}.kb-robot-arm{position:absolute;left:2%;top:0;width:75%;height:92%;overflow:visible;filter:drop-shadow(0 8px 7px #02061780)}.kb-arm-upper{transform-origin:91px 171px;animation:kbArmShoulder 6s ease-in-out infinite}.kb-arm-fore{transform-origin:113px 119px;animation:kbArmElbow 6s ease-in-out infinite}.kb-gripper{transform-origin:164px 89px;animation:kbArmWrist 6s ease-in-out infinite}.kb-held-chip{animation:kbHeldChip 6s ease-in-out infinite}.kb-assembly-status{position:absolute;left:12px;right:12px;top:10px;display:flex;align-items:center;gap:8px;color:#dbeafe;font-size:9px;letter-spacing:.12em;font-weight:900}.kb-status-dot{width:7px;height:7px;border-radius:50%;background:#34d399;box-shadow:0 0 10px #34d399;animation:kbLedBlink 1s infinite}.kb-status-step{margin-left:auto;color:#67e8f9}.kb-status-text{animation:kbStatusText 6s steps(1,end) infinite}
+@keyframes kbChipLift{0%,10%{transform:translate(0,0) rotate(0)}20%,35%{transform:translate(35px,-63px) rotate(12deg)}45%,58%{transform:translate(115px,-92px) rotate(0)}70%,84%{transform:translate(155px,-35px) rotate(-10deg);opacity:0}85%,100%{transform:translate(0,0) rotate(0);opacity:1}}
+@keyframes kbArmShoulder{0%,100%{transform:rotate(0)}18%,38%{transform:rotate(-12deg)}50%,65%{transform:rotate(5deg)}78%{transform:rotate(-4deg)}}
+@keyframes kbArmElbow{0%,100%{transform:rotate(0)}18%,38%{transform:rotate(18deg)}50%,65%{transform:rotate(-12deg)}78%{transform:rotate(4deg)}}
+@keyframes kbArmWrist{0%,100%{transform:rotate(0)}20%,38%{transform:rotate(-16deg)}50%,70%{transform:rotate(12deg)}}
+@keyframes kbHeldChip{0%,13%{transform:translate(0,0);opacity:0}18%,42%{transform:translate(0,-8px);opacity:1}52%,68%{transform:translate(22px,36px);opacity:1}75%,100%{transform:translate(22px,36px);opacity:0}}
+@keyframes kbChipSeat{0%,48%{transform:translateY(-18px) scale(.7);opacity:.35}58%,72%{transform:translateY(0) scale(1);opacity:1}78%,100%{transform:translateY(0) scale(.85);opacity:.9}}
+@keyframes kbLedBlink{0%,100%{opacity:.35}50%{opacity:1}}@keyframes kbStatusText{0%,19%{content:"PICKING CHIP"}20%,49%{opacity:1}50%,74%{opacity:.7}75%,100%{opacity:1}}
+/* Title-linked motion signatures: each project type animates in a matching way */
+.motion-signal .project-anime{animation:signalBlink 1.6s steps(2,end) infinite}.motion-path .project-anime{animation:pathSweep 2.2s ease-in-out infinite}.motion-arm .project-anime{animation:armPick 2.8s ease-in-out infinite}.motion-sensor .project-anime{animation:sensorScan 2s ease-in-out infinite}.motion-wireless .project-anime{animation:wirelessPing 2.1s ease-out infinite}.motion-chip .project-anime{animation:chipGlow 1.9s ease-in-out infinite}.motion-robot .project-anime{animation:robotBounce 1.5s ease-in-out infinite}.motion-circuit .project-anime{animation:projectFloat 2.7s ease-in-out infinite}
+@keyframes signalBlink{0%,45%{filter:brightness(.8);transform:scale(.94)}50%,100%{filter:brightness(1.4);transform:scale(1.06)}}@keyframes pathSweep{0%,100%{transform:translateX(-3px) rotate(-8deg)}50%{transform:translateX(5px) rotate(8deg)}}@keyframes armPick{0%,100%{transform:translateY(1px) rotate(-8deg)}35%{transform:translateY(-8px) rotate(12deg)}65%{transform:translateY(2px) rotate(-2deg)}}@keyframes sensorScan{0%,100%{box-shadow:0 8px 18px #0f172a30}50%{box-shadow:0 0 0 7px color-mix(in srgb,var(--c) 24%,transparent),0 0 22px var(--c)}}@keyframes wirelessPing{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--c) 55%,transparent)}100%{box-shadow:0 0 0 13px transparent}}@keyframes chipGlow{0%,100%{filter:drop-shadow(0 0 1px var(--c));transform:translateY(0) rotate(-3deg)}50%{filter:drop-shadow(0 0 10px var(--c));transform:translateY(-5px) rotate(3deg)}}@keyframes robotBounce{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-5px) rotate(5deg)}}
+@media(max-width:760px){.kb-maker-intro{grid-template-columns:1fr;padding:20px;border-radius:20px}.kb-intro-copy h2{max-width:none}.kb-assembly{min-height:230px}.kb-board{left:30%;right:0}.kb-chip-tray{left:2%}.kb-robot-arm{width:78%}}
+@media(prefers-reduced-motion:reduce){.kb-loose-chip,.kb-arm-upper,.kb-arm-fore,.kb-gripper,.kb-held-chip,.kb-board-chip,.kb-board-led,.kb-status-dot,.kb-status-text,.project-anime,.project-anime:before,.project-anime:after{animation:none!important}}
+</style><style>
+/* Revised intro: robot stands beside the board; no chip-picking sequence */
+.kb-domain-showcase{min-height:285px}
+.kb-domain-showcase .kb-robot-arm,.kb-domain-showcase .kb-chip-tray,.kb-domain-showcase .kb-loose-chip{display:none!important}
+.kb-domain-showcase .kb-board-chip{animation:kbBoardGlow 2.3s ease-in-out infinite;transform:none}
+.kb-domain-showcase .kb-board{left:42%;right:2%;bottom:23px;height:116px}
+.kb-domain-showcase .kb-board-label{font-size:7px}
+.kb-domain-showcase .kb-status-step{color:#86efac}
+.kb-showcase-robot{position:absolute;z-index:3;left:8%;bottom:33px;width:118px;height:202px;animation:kbRobotIdle 3s ease-in-out infinite;filter:drop-shadow(0 9px 9px #02061780)}
+.kb-robot-antenna{position:absolute;top:0;left:57px;width:4px;height:22px;background:#67e8f9;border-radius:4px}
+.kb-robot-antenna:after{content:"";position:absolute;top:-5px;left:-4px;width:12px;height:12px;border-radius:50%;background:#f0abfc;box-shadow:0 0 15px #f0abfc}
+.kb-robot-head{position:absolute;top:20px;left:24px;width:70px;height:58px;border:3px solid #bae6fd;border-radius:17px;background:linear-gradient(145deg,#e0f2fe,#64748b);box-shadow:inset 0 -7px 0 #334155}
+.kb-robot-head span{position:absolute;top:18px;width:11px;height:13px;border-radius:50%;background:#22d3ee;box-shadow:0 0 9px #22d3ee}
+.kb-robot-head span:first-child{left:14px}.kb-robot-head span:nth-child(2){right:14px}
+.kb-robot-head i{position:absolute;left:24px;bottom:8px;width:19px;height:4px;border-radius:4px;background:#334155}
+.kb-robot-body{position:absolute;top:84px;left:19px;width:80px;height:64px;border:3px solid #67e8f9;border-radius:14px;background:linear-gradient(145deg,#2563eb,#0f172a);box-shadow:0 0 18px #22d3ee33;display:grid;place-items:center}
+.kb-robot-body b{font-size:13px;color:#e0f2fe;letter-spacing:.12em}.kb-robot-body i{position:absolute;left:8px;top:8px;width:5px;height:5px;border-radius:50%;background:#4ade80;box-shadow:0 0 7px #4ade80}.kb-robot-body i:last-child{left:auto;right:8px;background:#facc15;box-shadow:0 0 7px #facc15}
+.kb-robot-arm-left,.kb-robot-arm-right{position:absolute;top:91px;width:13px;height:53px;border-radius:10px;background:linear-gradient(90deg,#64748b,#bae6fd);border:2px solid #e0f2fe}
+.kb-robot-arm-left{left:5px;transform:rotate(12deg)}.kb-robot-arm-right{right:5px;transform:rotate(-12deg)}
+.kb-robot-leg{position:absolute;top:144px;width:17px;height:37px;border-radius:9px;background:linear-gradient(90deg,#475569,#bae6fd);border:2px solid #cbd5e1}
+.kb-leg-left{left:35px}.kb-leg-right{right:35px}
+.kb-robot-foot{position:absolute;top:174px;width:32px;height:12px;border-radius:7px;background:#38bdf8;border:2px solid #bae6fd}.kb-foot-left{left:22px}.kb-foot-right{right:22px}
+.kb-data-pulse{position:absolute;z-index:2;left:39%;width:8px;height:8px;border-radius:50%;background:#67e8f9;box-shadow:0 0 14px #67e8f9;animation:kbDataFlow 2.4s linear infinite}
+.pulse-one{bottom:90px}.pulse-two{bottom:125px;animation-delay:1.2s}
+@keyframes kbRobotIdle{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes kbBoardGlow{0%,100%{box-shadow:0 0 0 5px #0f172a55,0 0 12px #67e8f9}50%{box-shadow:0 0 0 5px #0f172a55,0 0 25px #67e8f9}}
+@keyframes kbDataFlow{0%{transform:translateX(0);opacity:0}20%{opacity:1}100%{transform:translateX(105px);opacity:0}}
+@media(max-width:760px){.kb-domain-showcase{min-height:260px}.kb-showcase-robot{transform:scale(.88);transform-origin:bottom left;left:3%;bottom:28px}.kb-domain-showcase .kb-board{left:36%;right:0}.kb-data-pulse{left:34%}}
+@media(prefers-reduced-motion:reduce){.kb-showcase-robot,.kb-domain-showcase .kb-board-chip,.kb-data-pulse{animation:none!important}}
+
+/* Futuristic three-domain hero inspired by the approved mockup */
+:root{--bg:#020d17;--sf:#061a29;--ink:#edf8ff;--mute:#a9c5d7;--line:#14364b;--gold:#ffc83d;--r:#22d3ee;--e:#34f5b5;--v:#c084fc;color-scheme:dark}
+body{background:radial-gradient(ellipse at 50% -15%,#123c59 0,transparent 48%),#020d17;color:#edf8ff}
+.wrap{max-width:1500px}
+header{padding:14px 0;border-bottom:1px solid #16405a;gap:12px;flex-wrap:wrap}
+.logo{color:#f4fbff;font-size:clamp(22px,2.5vw,30px)}
+.kb-maker-intro{grid-template-columns:minmax(230px,.7fr) repeat(3,minmax(180px,1fr));gap:0;padding:0;border-radius:0;border:0;background:#03101c;min-height:350px;box-shadow:0 15px 50px #0008}
+.kb-intro-copy{padding:clamp(18px,2.5vw,36px);align-self:center}
+.kb-intro-copy h2{font-size:clamp(28px,3vw,42px);max-width:11ch}
+.kb-intro-copy h2 i:first-child{color:#22d3ee}.kb-intro-copy h2 i:nth-child(2){color:#34f5b5}.kb-intro-copy h2 i:nth-child(3){color:#c084fc}
+.kb-intro-copy p{font-size:15px;color:#c1d9e8}
+.kb-domain-pills{display:none}
+.kb-assembly.kb-domain-showcase{display:none}
+.kb-domain-panel{position:relative;min-height:350px;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:20px;background:linear-gradient(180deg,transparent 35%,#020b15f5 100%),radial-gradient(ellipse at 50% 40%,var(--glow),#061727 70%);border-left:1px solid #ffffff18;isolation:isolate}
+.kb-domain-panel:before{content:"";position:absolute;inset:0;background-image:linear-gradient(#64dfff18 1px,transparent 1px),linear-gradient(90deg,#64dfff18 1px,transparent 1px);background-size:22px 22px;transform:perspective(360px) rotateX(28deg) scale(1.5);transform-origin:bottom;z-index:-1}
+.kb-domain-panel .domain-art{position:absolute;inset:8% 4% 18%;display:grid;place-items:center;font-size:clamp(75px,9vw,145px);filter:drop-shadow(0 0 22px var(--glow));animation:domainFloat 3s ease-in-out infinite}
+.kb-domain-panel:nth-child(3) .domain-art{animation-delay:-1s}.kb-domain-panel:nth-child(4) .domain-art{animation-delay:-2s}
+.kb-domain-panel strong{font-size:clamp(18px,1.7vw,25px);color:var(--glow);position:relative;z-index:1}.kb-domain-panel small{color:#e0f1ff;position:relative;z-index:1}
+@keyframes domainFloat{0%,100%{transform:translateY(0) rotate(-3deg) scale(1)}50%{transform:translateY(-10px) rotate(3deg) scale(1.04)}}
+.hero{padding:24px 0 10px}.hero h1{color:#f4fbff}.hero p{color:#a9c5d7}
+.tabs{grid-template-columns:repeat(auto-fit,minmax(145px,1fr))}.tab,.card,.tool-card,.feature-strip>div{background:linear-gradient(145deg,#082235,#041521);border-color:#17445c;color:#edf8ff;box-shadow:0 8px 24px #0004}
+.tab:hover,.card:hover{border-color:#22d3ee;box-shadow:0 0 24px #22d3ee25;transform:translateY(-3px)}
+.feature-strip>div{border:1px solid #17445c;border-radius:14px}.search-tools input,.sort-label select{background:#061a29;color:#edf8ff;border-color:#17445c}
+.project-anime{background:linear-gradient(145deg,#102f45,#081827);border-color:color-mix(in srgb,var(--c) 70%,#fff);box-shadow:0 0 18px color-mix(in srgb,var(--c) 25%,transparent)}
+@media(max-width:900px){.kb-maker-intro{grid-template-columns:repeat(3,minmax(0,1fr))}.kb-intro-copy{grid-column:1/-1;padding:22px}.kb-intro-copy h2{max-width:none}.kb-domain-panel{min-height:240px;padding:14px}}
+@media(max-width:560px){.kb-maker-intro{grid-template-columns:1fr}.kb-domain-panel{min-height:220px;border-left:0;border-top:1px solid #ffffff18}.kb-domain-panel .domain-art{font-size:95px}.head-actions{flex-wrap:wrap;justify-content:flex-start}}
+
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+<symbol id="i-pin" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+<symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c1-4.5 4.5-6.5 8-6.5s7 2 8 6.5"/></symbol>
+<symbol id="i-box" viewBox="0 0 24 24"><path d="M21 8l-9-5-9 5v8l9 5 9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></symbol>
+<symbol id="i-star" viewBox="0 0 24 24"><path d="M12 3l2.8 5.7 6.2.9-4.5 4.4 1.1 6.2L12 17.2 6.4 20.2l1.1-6.2L3 9.6l6.2-.9z"/></symbol>
+<symbol id="i-bulb" viewBox="0 0 24 24"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 00-3.5 10.9c.9.7 1.5 1.6 1.5 2.6h4c0-1 .6-1.9 1.5-2.6A6 6 0 0012 3z"/></symbol>
+<symbol id="i-tag" viewBox="0 0 24 24"><path d="M19 5L5 19"/><circle cx="7" cy="7" r="2.5"/><circle cx="17" cy="17" r="2.5"/></symbol>
+<symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9L7 7M17 17l2.1 2.1M4.9 19.1L7 17M17 7l2.1-2.1"/></symbol>
+<symbol id="i-heart" viewBox="0 0 24 24"><path d="M12 21s-8-5.2-8-11a4.5 4.5 0 018-2.8A4.5 4.5 0 0120 10c0 5.8-8 11-8 11z"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8.5 8.5 0 019.5 4 8.5 8.5 0 1020 14.5z"/></symbol>
+<symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.5 12h11L21 7H6"/></symbol>
+<symbol id="i-robot" viewBox="0 0 24 24"><rect x="5" y="8" width="14" height="11" rx="3"/><path d="M12 4v4"/><circle cx="12" cy="3.5" r="1"/><circle cx="9" cy="13" r="1.3"/><circle cx="15" cy="13" r="1.3"/><path d="M9 17h6M3 13v3M21 13v3"/></symbol>
+<symbol id="i-chip" viewBox="0 0 24 24"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5"/><path d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"/></symbol>
+<symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/></symbol>
+<symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+<symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></symbol>
+<symbol id="i-cap" viewBox="0 0 24 24"><path d="M22 10L12 5 2 10l10 5z"/><path d="M6 12v5c3 2 9 2 12 0v-5"/></symbol>
+</defs></svg>
+<nav class="kb-rail" id="kbRailL" aria-label="Project areas">
+<button type="button" data-scene="robotics" data-label="Robotics" aria-label="Robotics animation" aria-pressed="true" style="--a:#60A5FA;--b:#2457C5"><i class="tile"><svg class="ico" aria-hidden="true"><use href="#i-robot"/></svg></i></button>
+<button type="button" data-scene="embedded" data-label="Embedded" aria-label="Embedded animation" aria-pressed="false" style="--a:#2DD4BF;--b:#0E7C6B"><i class="tile"><svg class="ico" aria-hidden="true"><use href="#i-chip"/></svg></i></button>
+<button type="button" data-scene="vlsi" data-label="VLSI / FPGA" aria-label="VLSI animation" aria-pressed="false" style="--a:#A78BFA;--b:#6A3FB5"><i class="tile"><svg class="ico" aria-hidden="true"><use href="#i-layers"/></svg></i></button>
+</nav>
+<nav class="kb-rail" id="kbRailR" aria-label="Student tools">
+<button type="button" data-scene="orders" data-label="Orders" aria-label="Orders animation" aria-pressed="false" style="--a:#FBBF24;--b:#D97706"><i class="tile"><svg class="ico" aria-hidden="true"><use href="#i-box"/></svg></i></button>
+<button type="button" data-scene="reviews" data-label="Reviews" aria-label="Reviews animation" aria-pressed="false" style="--a:#FACC15;--b:#CA8A04"><i class="tile"><svg class="ico" aria-hidden="true"><use href="#i-star"/></svg></i></button>
+<button type="button" data-scene="coupons" data-label="Coupons" aria-label="Coupons animation" aria-pressed="false" style="--a:#F472B6;--b:#DB2777"><i class="tile"><svg class="ico" aria-hidden="true"><use href="#i-tag"/></svg></i></button>
+<button type="button" data-scene="request" data-label="Request a project" aria-label="Request a project animation" aria-pressed="false" style="--a:#34D399;--b:#059669"><i class="tile"><svg class="ico" aria-hidden="true"><use href="#i-bulb"/></svg></i></button>
+<button type="button" data-scene="admin" data-label="Admin" aria-label="Admin animation" aria-pressed="false" style="--a:#60A5FA;--b:#2563EB"><i class="tile"><svg class="ico" aria-hidden="true"><use href="#i-gear"/></svg></i></button>
+<button type="button" data-scene="equipment" data-label="Purchase equipment" aria-label="Purchase order equipment animation" aria-pressed="false" style="--a:#FB923C;--b:#EA580C"><i class="tile"><svg class="ico" aria-hidden="true"><use href="#i-cart"/></svg></i></button>
+</nav>
+<div class="kb-scene-name" id="kbSceneName" aria-live="polite">Robotics</div>
+<div class="kb-panel" id="kbPanel" hidden role="region" aria-label="Related options"></div>
+<div class="wrap">
+<header><div class="header-left"><div class="logo"><span class="kb-mini-robot-head" aria-hidden="true"><i></i><b></b><em></em></span>KitBench <span class="brand-mark">✦</span><small class="brand-sub">BUILD • CODE • INNOVATE</small><button class="live-location-btn" id="liveLocationBtn" type="button" aria-label="Show my live location">📍 Use live location</button><small class="live-location-status" id="liveLocationStatus" aria-live="polite">Location is off until you choose to share it</small></div><button class="signup-top" id="signupTop" type="button">＋ Sign up</button></div><div class="head-actions"><button class="profile-avatar-btn" id="profileTop" type="button" aria-label="Open student profile"><img class="profile-avatar-img" id="profileAvatar" alt="Student profile image" src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 80 80%27%3E%3Crect width=%2780%27 height=%2780%27 rx=%2740%27 fill=%27%23dce8e3%27/%3E%3Ccircle cx=%2740%27 cy=%2729%27 r=%2714%27 fill=%27%2358706a%27/%3E%3Cpath d=%27M14 75c2-17 12-26 26-26s24 9 26 26%27 fill=%27%2358706a%27/%3E%3C/svg%3E"><span id="profileLabel">Profile</span></button><button class="utility-btn" id="themebtn" aria-label="Toggle dark mode" title="Toggle dark mode"><i class="tile" style="--a:#A78BFA;--b:#7C3AED"><svg class="ico" aria-hidden="true"><use href="#i-moon"/></svg></i>Theme</button><button class="utility-btn" id="savedbtn" aria-pressed="false"><i class="tile" style="--a:#FB7185;--b:#E11D48"><svg class="ico" aria-hidden="true"><use href="#i-heart"/></svg></i>Saved <span id="savedcount">0</span></button><button class="cartbtn" id="cartbtn"><svg class="ico" aria-hidden="true"><use href="#i-cart"/></svg> Cart (0)</button></div></header>
+<section class="hero">
+<h1>Project kits for <span class="w w-r">robotics</span>, <span class="w w-e">embedded</span> and <span class="w w-v">VLSI</span></h1>
+<p>Built for students: Level 1 is mini projects, Level 2 is average projects, and Level 3 is final year projects. Every kit ships with the parts, a step-by-step build guide and working code.</p>
+</section>
+<div class="tabs" id="tabs"></div>
+<div class="search-tools"><input id="q" type="search" placeholder="Search projects, e.g. UART or line follower" aria-label="Search kits"><label class="sort-label">Sort by <select id="sort"><option value="featured">Featured</option><option value="price-low">Price: low to high</option><option value="price-high">Price: high to low</option><option value="name">Name: A–Z</option><option value="hours">Build time</option></select></label><span class="meta result-count" id="count"></span></div>
+<div class="feature-strip"><div style="--a:#FBBF24;--b:#D97706"><i class="tile"><svg class="ico" aria-hidden="true"><use href="#i-bolt"/></svg></i><b>450+ project ideas</b><span>Explore hands-on builds</span></div><div style="--a:#34D399;--b:#059669"><i class="tile"><svg class="ico" aria-hidden="true"><use href="#i-layers"/></svg></i><b>3 learning levels</b><span>Mini to final-year projects</span></div><div style="--a:#818CF8;--b:#4F46E5"><i class="tile"><svg class="ico" aria-hidden="true"><use href="#i-cap"/></svg></i><b>Student-friendly</b><span>Guides, code and components</span></div></div>
+<nav class="feature-nav" aria-label="Student tools"><button data-tool="orders" style="--a:#FBBF24;--b:#D97706"><i class="tile"><svg class="ico" aria-hidden="true"><use href="#i-box"/></svg></i>My orders</button><button data-tool="reviews" style="--a:#FACC15;--b:#CA8A04"><i class="tile"><svg class="ico" aria-hidden="true"><use href="#i-star"/></svg></i>Reviews</button><button data-tool="project-request" style="--a:#34D399;--b:#059669"><i class="tile"><svg class="ico" aria-hidden="true"><use href="#i-bulb"/></svg></i>Request a project</button><button data-tool="coupons" style="--a:#F472B6;--b:#DB2777"><i class="tile"><svg class="ico" aria-hidden="true"><use href="#i-tag"/></svg></i>Coupons</button><button data-tool="admin" style="--a:#60A5FA;--b:#2563EB"><i class="tile"><svg class="ico" aria-hidden="true"><use href="#i-gear"/></svg></i>Admin dashboard</button></nav>
+<section class="tool-panel" aria-label="More KitBench features">
+<div class="tool-card" style="--a:#FBBF24;--b:#D97706"><h3><i class="tile"><svg class="ico" aria-hidden="true"><use href="#i-box"/></svg></i>Orders & purchase history</h3><p>Review verified orders saved in this browser after checkout.</p><button data-tool="orders">View my orders</button></div>
+<div class="tool-card" style="--a:#FACC15;--b:#CA8A04"><h3><i class="tile"><svg class="ico" aria-hidden="true"><use href="#i-star"/></svg></i>Ratings & reviews</h3><p>Share feedback on a project kit and read reviews saved on this browser.</p><button data-tool="reviews">Write a review</button></div>
+<div class="tool-card" style="--a:#34D399;--b:#059669"><h3><i class="tile"><svg class="ico" aria-hidden="true"><use href="#i-bulb"/></svg></i>Request a project</h3><p>Can’t find the project you need? Tell us what you want and we’ll review your request.</p><button data-tool="project-request">Request a project</button></div>
+<div class="tool-card" style="--a:#F472B6;--b:#DB2777"><h3><i class="tile"><svg class="ico" aria-hidden="true"><use href="#i-tag"/></svg></i>Student discounts</h3><p>Try a sample coupon at checkout to preview the discount flow.</p><button data-tool="coupons">Explore coupons</button></div>
+<div class="tool-card" style="--a:#60A5FA;--b:#2563EB"><h3><i class="tile"><svg class="ico" aria-hidden="true"><use href="#i-gear"/></svg></i>Admin tools</h3><p>Preview project management and order summaries. This front-end demo is not secured for live admin use.</p><button data-tool="admin">Open dashboard</button></div>
+</section>
+<div class="lvls" id="lvls"></div>
+<main class="grid" id="grid"></main>
+</div>
+
+<dialog id="dlg"><div class="dm" id="dm"></div></dialog>
+<dialog id="co"><div class="dm" id="com"></div></dialog>
+<aside id="cart" aria-label="Cart">
+<div style="display:flex;justify-content:space-between;align-items:center"><h2>Your cart</h2><button class="x" id="closecart">Close</button></div>
+<div class="items" id="items"></div>
+<div class="tot"><span>Total</span><span id="total">₹0</span></div>
+<p class="note" id="note"></p>
+<button class="b1" id="checkout" style="padding:12px">Checkout</button>
+</aside>
+
+<dialog id="featureDlg" class="feature-modal"><div id="featureContent"></div></dialog>
+<script>
+var C={robotics:"var(--r)",embedded:"var(--e)",vlsi:"var(--v)"},KC={robotics:"#2457C5",embedded:"#0E7C6B",vlsi:"#6A3FB5"};
+function kbTile(n,a,b){return '<i class="tile" style="--a:'+a+';--b:'+b+'"><svg class="ico" aria-hidden="true"><use href="#i-'+n+'"/></svg></i>'}
+var TI={all:["grid","#FBBF24","#D97706"],robotics:["robot","#60A5FA","#2457C5"],embedded:["chip","#2DD4BF","#0E7C6B"],vlsi:["layers","#A78BFA","#6A3FB5"]},LC={"Level 1: Mini":"#22C55E","Level 2: Average":"#F59E0B","Level 3: Final year":"#EF4444",all:"#64748B"};
+var N={robotics:"Robotics",embedded:"Embedded",vlsi:"VLSI / FPGA"};
+var raw={robotics:`Line follower robot|follows a black line using IR sensors
+Bluetooth-controlled car|drive it from a phone app
+Obstacle-avoiding car|an ultrasonic sensor detects walls and turns away
+Light-seeking robot|moves toward the brightest light using LDRs
+Light-avoiding robot|hides in the dark using LDRs
+Clap-controlled car|starts and stops on a sound sensor
+Servo sweep radar|an ultrasonic sensor on a servo maps the surroundings on a screen
+IR remote-controlled car|drive it with a TV-style remote
+Bristlebot|a tiny vibration-driven robot that crawls on its own
+Edge-detecting robot|stays on a table using cliff sensors
+Automatic dustbin lid|opens when a hand comes near
+One-servo gripper|a mini claw that picks up light objects
+Voice-controlled car|drive it with spoken commands through a phone app
+Doodle plotter bot|a two-servo arm that draws simple shapes
+Dancing robot|servos move to the beat of a sound sensor
+Solar tracker|a panel that turns to follow the sun
+Flame-detecting alarm robot|finds a flame and sounds an alert
+Wall-following robot|keeps a steady distance from a wall
+Maze-solving robot|finds its way out using the left-hand rule
+PID line follower|smooth, fast line following with tuned control
+Wi-Fi joystick robot|ESP32 robot driven from a web page
+Mini sumo robot|pushes opponents out of a ring
+Fire-fighting robot|finds a flame and puts it out with a small fan or pump
+Gesture-controlled robot|tilt your hand to drive using an accelerometer
+Potentiometer-controlled robotic arm|four joints moved by hand knobs
+Offline voice-command robot|voice module with no internet needed
+Camera rover|ESP32-CAM rover streaming live video
+Color-sorting machine|sorts objects by color into bins
+Conveyor pick-and-place sorter|arm and conveyor that sort items
+Person-following cart|follows a person using ultrasonic sensors
+Pipe-inspection crawler|a small tracked robot with a camera
+Quadruped spider robot|four legs, twelve servos
+Self-parking toy car|parks itself between two objects
+Leader-follower robots|one robot follows another
+Self-balancing robot|two wheels balanced with an IMU and PID
+6-axis arm with inverse kinematics|type a target position and the arm reaches it
+Lidar mapping robot|builds a map of a room using a lidar sensor
+ROS 2 mobile robot|navigation stack running on a Raspberry Pi
+Object-tracking robot|follows a colored ball using OpenCV
+Sensor-fusion rover|combines encoders, IMU and range sensors to navigate
+Hexapod walker|six legs with several gaits
+Quadcopter drone build|assemble and tune a flight controller
+Robotic hand|fingers that copy your hand using flex sensors
+Face-tracking turret|a pan-tilt camera that follows a face
+Marker-navigation warehouse robot|follows ArUco or QR markers to shelves
+Mecanum-wheel robot|moves sideways and diagonally
+Biped walking robot|two legs with balance control
+Vision-guided pick-and-place arm|finds objects with a camera and picks them
+Micromouse maze solver|flood-fill algorithm for fast maze runs
+Water-surface cleaning robot|a boat prototype that collects floating litter`,
+embedded:`LED pattern controller|blink and chase patterns with a button to change them
+Traffic light controller|a four-way junction with timing
+Debounced push-button toggle|a clean on/off switch in software
+Digital dice|press a button to roll on a seven-segment display
+Temperature display|temperature on an LCD using an LM35 or DHT11
+Ultrasonic distance meter|distance on a display
+Door-open alarm|reed switch triggers a buzzer
+Automatic night lamp|turns on in the dark using an LDR
+Soil moisture indicator|LEDs show how dry the soil is
+Rain alert system|buzzer when rain is detected
+RTC digital clock|accurate time and date on an LCD
+Keypad door lock|enter a code to open a servo-driven latch
+Buzzer piano|play notes with push buttons
+Gas leakage detector|alarm when gas levels rise
+Motion-activated light|PIR sensor switches a light
+Servo-controlled door|opens and closes from a button or sensor
+Digital voltmeter|read a voltage with the ADC and show it
+ESP32 weather station|temperature, humidity and pressure on a web page
+Wi-Fi relay controller|switch appliances from your phone
+RFID attendance system|tap a card to log attendance
+Fingerprint door lock|enroll and verify fingerprints
+Heart-rate and SpO2 monitor|pulse and oxygen readings on a display
+GPS tracker with SD logging|save routes to a card
+SD-card data logger|log sensor data with timestamps
+Automatic plant watering|a pump runs when soil is dry
+Smart energy meter|measures power and energy use of an appliance
+Bluetooth home control|control appliances from a phone app
+Water level controller|starts and stops a pump by tank level
+Interrupt-based stopwatch|precise timing with timers and interrupts
+Temperature-controlled fan|fan speed follows temperature using PWM
+OLED game console|a small handheld game with buttons
+IR remote appliance control|switch loads with a TV remote
+Hall-sensor tachometer|measures motor or wheel speed
+MQTT sensor node|sends readings to a live dashboard
+STM32 PID motor controller|closed-loop speed with encoder feedback
+FreeRTOS data acquisition|several tasks reading and sending data
+CAN bus node network|several boards talking like a vehicle network
+Custom UART bootloader|update firmware without a programmer
+Battery monitor|tracks voltage, current and state of charge
+LoRa sensor node|long-range, low-power wireless readings
+Keyword spotting with TinyML|recognize spoken words on a microcontroller
+ESP32 over-the-air updates|update firmware wirelessly
+Custom USB device|a USB keyboard or controller you design
+Low-frequency oscilloscope|a simple scope on an STM32
+IMU attitude estimator|Kalman or complementary filter for orientation
+BLDC motor controller|spin a brushless motor with commutation
+Logic analyzer|capture and decode I2C and SPI signals
+Modbus-to-MQTT gateway|connects industrial sensors to the cloud
+Register-level drivers|write GPIO, UART and timer code without a HAL
+Secure IoT device|encrypted communication and signed firmware`,
+vlsi:`Logic gates on FPGA|build and test all basic gates in Verilog
+Half and full adder|add bits on switches and LEDs
+4-bit ripple-carry adder|chain full adders
+Multiplexer and demultiplexer|route signals with select lines
+Encoder and decoder|including a priority encoder
+Seven-segment decoder|show hex digits
+Magnitude comparator|compare two 4-bit numbers
+Flip-flops|D, JK and T, with a testbench
+Up/down counter|a counter with direction and reset
+Shift registers|serial-in/parallel-out and the reverse
+Clock divider|turn a fast clock into a slow blink
+Button debouncer|a clean signal from a noisy switch
+Traffic light FSM|a finite state machine on LEDs
+LED chaser|a sweeping light pattern
+Parity generator and checker|detect single-bit errors
+Binary to Gray code converter|and back
+4-bit ALU|add, subtract, AND, OR and compare
+Sequence detector FSM|detects a bit pattern in a stream
+UART transmitter and receiver|talk to a PC terminal
+SPI master and slave|exchange data with a sensor
+I2C master controller|read an I2C device
+VGA pattern generator|draw bars and shapes on a monitor
+PWM generator|dim an LED or control a motor
+Synchronous FIFO|a buffer with full and empty flags
+Asynchronous FIFO|crossing between two clock domains
+Booth multiplier|signed multiplication
+Barrel shifter|shift by any amount in one cycle
+FPGA stopwatch|timing with a display and buttons
+Vending machine controller|an FSM with coins and products
+PS/2 keyboard interface|read key presses
+FIR filter|a digital filter on streaming data
+LFSR random generator|pseudo-random numbers and test patterns
+Elevator controller|floors, requests and door states
+Pong on VGA|a playable game in hardware
+8-bit RISC processor|design the datapath and control
+5-stage pipelined RISC-V core|with hazard handling
+RISC-V mini SoC|core with UART and GPIO
+AXI4-Lite peripheral|a custom register-mapped block
+Direct-mapped cache controller|hits, misses and write policy
+Floating-point adder and multiplier|IEEE-style units
+CORDIC processor|sine and cosine without multipliers
+FFT accelerator|frequency analysis in hardware
+Basic Ethernet MAC|frames with a loopback testbench
+SDRAM controller|read and write external memory
+HDMI or DVI video output|higher-resolution display
+Edge-detection pipeline|real-time image filtering
+Small CNN accelerator|digit recognition on FPGA
+AES encryption core|encrypt and decrypt blocks
+RTL-to-GDSII flow|take a small design to layout with OpenLane and SkyWater 130 nm
+SystemVerilog verification environment|constrained-random tests for an ALU or FIFO`};
+var LV=["Level 1: Mini","Level 2: Average","Level 3: Final year"],PX={robotics:"R",embedded:"E",vlsi:"V"},PR={robotics:[1299,2499,5499],embedded:[899,1999,3999],vlsi:[2499,4499,7499]};
+var LN={robotics:["How it works, from block diagram to build","Assembling and wiring the hardware","Testing, tuning and extending the project"],embedded:["How it works, from block diagram to code","Wiring the circuit and writing the firmware","Testing, debugging and extending the project"],vlsi:["How the design works, from block diagram to RTL","Writing Verilog and testbenches, then running it","Debugging with simulation and extending the design"]};
+var BX={robotics:[["Controller board","Motors or servos","Sensors","Chassis, wiring and battery holder"],["Controller board","Motors or servos with driver","Several sensors","Chassis, wiring and battery holder"],["Main controller board","Actuators and driver boards","Sensors or camera","Frame, power supply and cables"]],embedded:[["Microcontroller board","Breadboard and jumper wires","Sensors, LEDs and resistors","Build guide"],["Microcontroller or ESP32 board","Sensor or display modules","Breadboard and cables","Build guide and source code"],["Development board","Peripheral modules","Debug cable","Build guide and source code"]],vlsi:[["FPGA board","USB cable","Switch and LED expansion","Lab guide and Verilog files"],["FPGA board","Peripheral modules","USB cable","Lab guide, Verilog files and testbenches"],["FPGA board with memory","Debug header and cables","Reference RTL","Full guide and testbenches"]]},SW=["Step-by-step guide","Project files and scripts","Software setup notes (no board needed)"];
+var K=[];Object.keys(raw).forEach(function(d){raw[d].split("\n").forEach(function(l,i){var a=l.split("|"),B={robotics:[17,33],embedded:[16,33],vlsi:[17,34]}[d],g=i<B[0]?0:i<B[1]?1:2,s=/GDSII|verification/.test(a[0]);K.push({id:PX[d]+(i<9?"0":"")+(i+1),d:d,lv:LV[g],h:[4,10,40][g]+i%3,p:(s?1499:PR[d][g])+(i%5)*100,t:a[0],s:a[1].charAt(0).toUpperCase()+a[1].slice(1)+".",learn:LN[d],box:s?SW:BX[d][g]})})});
+var st={d:"all",lv:"all",q:"",n:12,savedOnly:false,sort:"featured"},cart={};
+var saved={};try{saved=JSON.parse(localStorage.getItem("kitbench-saved")||"{}")||{}}catch(e){saved={}}
+function saveState(){try{localStorage.setItem("kitbench-saved",JSON.stringify(saved))}catch(e){}}
+function updateSaved(){var n=Object.keys(saved).filter(function(id){return saved[id]}).length;$("savedbtn").setAttribute("aria-pressed",String(st.savedOnly));$("savedbtn").innerHTML=kbTile("heart","#FB7185","#E11D48")+"Saved <span id=\"savedcount\">"+n+"</span>"}
+var $=function(i){return document.getElementById(i)};
+var inr=function(n){return "₹"+n.toLocaleString("en-IN")};
+function art(k){
+var c=C[k.d],id="g"+k.id,robot=k.d==="robotics",vlsi=k.d==="vlsi";
+var base='<defs><linearGradient id="'+id+'" x1="0" y1="0" x2="1" y2="1"><stop stop-color="'+c+'"/><stop offset="1" stop-color="'+(robot?'#172554':vlsi?'#6D28D9':'#064E3B')+'"/></linearGradient><linearGradient id="'+id+'s" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#FFFFFF" stop-opacity=".95"/><stop offset="1" stop-color="#CBD5E1" stop-opacity=".8"/></linearGradient><filter id="'+id+'shadow" x="-30%" y="-30%" width="160%" height="180%"><feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#07111F" flood-opacity=".28"/></filter></defs>';
+var shapes='';
+if(robot){
+shapes='<g filter="url(#'+id+'shadow)"><ellipse cx="150" cy="133" rx="78" ry="9" fill="#0F172A" opacity=".15"/><path d="M75 91 L145 55 224 83 151 121Z" fill="#334155"/><path d="M75 91 L151 121 151 132 75 102Z" fill="#0F172A"/><path d="M151 121 L224 83 224 94 151 132Z" fill="#1E293B"/><path d="M93 86 L145 62 205 84 151 110Z" fill="url(#'+id+')" stroke="#FFFFFF" stroke-opacity=".6"/><path d="M108 81 L145 64 183 78 146 96Z" fill="#0F172A" stroke="#93C5FD" stroke-width="1.5"/><path d="M118 79 L145 67 170 77 144 89Z" fill="#38BDF8"/><path d="M132 70 L145 64 157 69 144 76Z" fill="#E0F2FE"/><path d="M110 94 L124 100 124 109 110 103Z" fill="#F59E0B"/><path d="M179 90 L193 84 193 94 179 101Z" fill="#34D399"/><g fill="#111827" stroke="#94A3B8" stroke-width="2"><ellipse cx="95" cy="111" rx="12" ry="17" transform="rotate(-24 95 111)"/><ellipse cx="195" cy="109" rx="12" ry="17" transform="rotate(24 195 109)"/></g><g fill="#64748B"><ellipse cx="95" cy="111" rx="5" ry="9"/><ellipse cx="195" cy="109" rx="5" ry="9"/></g><path d="M151 60 L151 40 171 31 190 38 190 57 171 67Z" fill="url(#'+id+'s)" stroke="'+c+'" stroke-width="2"/><path d="M151 40 L171 49 190 38" fill="none" stroke="#94A3B8" stroke-width="2"/><circle cx="171" cy="47" r="5" fill="#38BDF8" stroke="#E0F2FE" stroke-width="2"/><path d="M158 62 L158 74 M183 58 L183 70" stroke="#FBBF24" stroke-width="3" stroke-linecap="round"/></g>';
+}else if(vlsi){
+shapes='<g filter="url(#'+id+'shadow)"><ellipse cx="151" cy="131" rx="82" ry="8" fill="#0F172A" opacity=".15"/><path d="M65 91 L146 48 238 82 155 126Z" fill="#312E81"/><path d="M65 91 L155 126 155 136 65 101Z" fill="#1E1B4B"/><path d="M155 126 L238 82 238 92 155 136Z" fill="#4338CA"/><path d="M82 89 L146 57 220 84 155 116Z" fill="url(#'+id+')" stroke="#C4B5FD" stroke-width="1.5"/><path d="M110 84 L145 66 181 79 146 98Z" fill="#111827" stroke="#A5B4FC" stroke-width="2"/><path d="M119 82 L145 69 172 79 146 93Z" fill="#0EA5E9"/><path d="M126 80 L145 71 164 79 145 88Z" fill="#1E293B"/><g stroke="#FDE68A" stroke-width="2"><path d="M112 79l-9-4m13 9-10-4m75 0 10-5m-13 9 10-5M143 66v-7m8 10v-7m-13 41v-8m9 5v-8"/></g><g fill="#F8FAFC"><circle cx="91" cy="91" r="2"/><circle cx="202" cy="86" r="2"/><circle cx="154" cy="108" r="2"/></g><path d="M90 84L106 76M187 91L202 84M159 103L178 94" stroke="#67E8F9" stroke-width="2" fill="none"/></g>';
+}else{
+shapes='<g filter="url(#'+id+'shadow)"><ellipse cx="151" cy="132" rx="82" ry="8" fill="#0F172A" opacity=".15"/><path d="M65 91 L147 49 239 83 155 127Z" fill="#334155"/><path d="M65 91 L155 127 155 137 65 101Z" fill="#0F172A"/><path d="M155 127 L239 83 239 93 155 137Z" fill="#1E293B"/><path d="M82 89 L147 57 221 84 155 117Z" fill="url(#'+id+')" stroke="#6EE7B7" stroke-width="1.5"/><path d="M124 79 L147 67 175 77 152 90Z" fill="#111827" stroke="#E2E8F0" stroke-width="2"/><path d="M130 79 L147 70 168 78 151 87Z" fill="#34D399"/><g stroke="#FDE68A" stroke-width="2"><path d="M129 76l-8-4m9 8-8-4m52 1 8-4m-10 8 8-4M141 68v-7m9 10v-7M139 91v7m9-10v7"/></g><rect x="91" y="82" width="18" height="11" rx="2" fill="#0F172A" stroke="#93C5FD" stroke-width="1.5" transform="rotate(-25 100 87)"/><rect x="184" y="82" width="17" height="10" rx="2" fill="#F59E0B" stroke="#FEF3C7" stroke-width="1.5" transform="rotate(-25 192 87)"/><path d="M102 98l15 7m55-5 15-7" stroke="#F8FAFC" stroke-width="2" opacity=".8"/></g>';
+}
+var title=k.t.toLowerCase(),emoji='🤖',caption=k.t;
+if(/line follower|edge-detect|maze|wall-follow|pid line/.test(title)){emoji='🛣️';caption='SMART PATH SENSING'}
+else if(/bluetooth|wi-fi|wifi|voice|gesture|remote|joystick|clap/.test(title)){emoji='📡';caption='WIRELESS CONTROL'}
+else if(/obstacle|radar|ultrasonic|distance|parking/.test(title)){emoji='📶';caption='SMART SENSOR SCAN'}
+else if(/solar|light-seeking|light-avoiding|ldr|sun/.test(title)){emoji='☀️';caption='LIGHT TRACKING'}
+else if(/fire|flame|smoke|gas|alcohol|safety|helmet|accident/.test(title)){emoji='🚨';caption='SAFETY MONITOR'}
+else if(/camera|vision|image|color-sort|cnn|edge-detection/.test(title)){emoji='📷';caption='VISION SYSTEM'}
+else if(/arm|gripper|servo|dancing|plotter|pick-and-place/.test(title)){emoji='🦾';caption='MOTION CONTROL'}
+else if(/heart|pulse|temperature|weather|humidity|health|ecg|bpm/.test(title)){emoji='💓';caption='LIVE SENSOR DATA'}
+else if(/display|oled|lcd|clock|stopwatch|vga|hdmi|pong/.test(title)){emoji='🖥️';caption='DISPLAY INTERFACE'}
+else if(/motor|car|rover|robot|sumo|bristlebot|fighting/.test(title)){emoji='🚙';caption='ROBOT MOTION'}
+else if(/fpga|verilog|systemverilog|rtl|risc|processor|alu|cache|axi|sdram|ethernet|filter|fft|cordic|lfsr|vlsi|chip|logic|counter|fsm|register|pipeline|adder|multiplier|gdsii/.test(title)){emoji='🧠';caption='DIGITAL LOGIC DESIGN'}
+else if(/arduino|esp32|microcontroller|embedded|sensor|iot|uart|i2c|spi|serial|interrupt|timer/.test(title)){emoji='🔌';caption='EMBEDDED CIRCUIT'}
+else if(/alarm|automatic|smart|monitor|controller|control/.test(title)){emoji='⚙️';caption='AUTOMATION BUILD'}
+var motion='motion-circuit';
+if(/traffic light|street light|lamp|led pattern|digital dice|counter|clock|stopwatch|timer/.test(title))motion='motion-signal';
+else if(/line follower|maze|path|wall-follow|lane detection|navigation|slam/.test(title))motion='motion-path';
+else if(/arm|gripper|pick-and-place|sorting|picker|robotic hand|servo/.test(title))motion='motion-arm';
+else if(/temperature|humidity|heart|pulse|distance|ultrasonic|soil moisture|water level|gas|rain|sensor|monitor/.test(title))motion='motion-sensor';
+else if(/bluetooth|wi-fi|wifi|wireless|remote|voice|gesture|rfid|uart|i2c|spi/.test(title))motion='motion-wireless';
+else if(/fpga|verilog|systemverilog|rtl|processor|alu|vlsi|chip|logic|adder|multiplier|register|pipeline|fsm|gdsii/.test(title))motion='motion-chip';
+else if(/car|rover|motor|robot|drone|vehicle|wheelchair/.test(title))motion='motion-robot';
+return '<div class="project-scene '+motion+'" style="--c:'+c+'"><svg class="art" viewBox="0 0 300 160" preserveAspectRatio="xMidYMid meet" role="img" aria-label="3D-style '+k.t.replace(/&/g,'&amp;').replace(/"/g,'&quot;')+' project illustration" style="--artc:'+c+';background:radial-gradient(ellipse at 50% 35%,color-mix(in srgb,'+c+' 22%,var(--sf)),color-mix(in srgb,'+c+' 4%,var(--sf)))">'+base+shapes+'</svg><span class="project-anime" aria-hidden="true">'+emoji+'</span><span class="scene-caption">'+caption+'</span></div>';
+}
+function tabs(){var h='<button class="tab" aria-pressed="'+(st.d=="all")+'" data-d="all"><b>All kits</b><span>'+K.length+' projects</span></button>';h=h.replace('<b>All kits</b>',kbTile.apply(null,TI.all)+'<b>All kits</b>');
+Object.keys(N).forEach(function(d){var n=K.filter(function(k){return k.d==d}).length;h+='<button class="tab" style="--c:'+C[d]+'" aria-pressed="'+(st.d==d)+'" data-d="'+d+'">'+kbTile.apply(null,TI[d])+'<b>'+N[d]+'</b><span>'+n+' projects</span></button>'});
+$("tabs").innerHTML=h;
+h="";["all"].concat(LV).forEach(function(l){h+='<button class="chip" aria-pressed="'+(st.lv==l)+'" data-l="'+l+'"><span class="dot" style="background:'+LC[l]+'"></span>'+(l=="all"?"Any level":l)+'</button>'});
+$("lvls").innerHTML=h}
+function grid(){var h="";var F=K.filter(function(k){return(st.d=="all"||k.d==st.d)&&(st.lv=="all"||k.lv==st.lv)&&(k.t+" "+k.s).toLowerCase().indexOf(st.q)>-1&&(!st.savedOnly||saved[k.id])});
+if(st.sort==="price-low")F.sort(function(a,b){return a.p-b.p});else if(st.sort==="price-high")F.sort(function(a,b){return b.p-a.p});else if(st.sort==="name")F.sort(function(a,b){return a.t.localeCompare(b.t)});else if(st.sort==="hours")F.sort(function(a,b){return a.h-b.h});
+F.slice(0,st.n).forEach(function(k){
+h+='<article class="card" style="--c:'+C[k.d]+';--k:'+KC[k.d]+'">'+art(k)+'<button class="save-btn'+(saved[k.id]?' on':'')+'" data-save="'+k.id+'" aria-label="'+(saved[k.id]?'Remove from saved':'Save project')+'" title="'+(saved[k.id]?'Remove from saved':'Save project')+'">'+(saved[k.id]?'♥ Saved':'♡ Save')+'</button><div class="cb"><div class="meta">'+k.id+', '+N[k.d]+', '+k.lv+', about '+k.h+' hours</div><h3>'+k.t+'</h3><p>'+k.s+'</p><div class="row"><span class="price">'+inr(k.p)+'</span><div class="btns"><button class="b2" data-v="'+k.id+'">Details</button><button class="b1" data-a="'+k.id+'">Add to cart</button></div></div></div></article>'});
+if(F.length>st.n)h+='<div style="grid-column:1/-1;text-align:center"><button class="b2" data-more="1">Show more ('+(F.length-st.n)+' left)</button></div>';$("grid").innerHTML=h||'<div style="grid-column:1/-1;padding:30px;border:1px dashed var(--line);border-radius:14px;text-align:center"><h3>No projects found</h3><p class="meta">Try another search or remove some filters.</p><button class="b2" id="resetfilters">Reset filters</button></div>';$("count").textContent=F.length+" projects";updateSaved()}
+function show(id){var k=K.filter(function(z){return z.id==id})[0];
+$("dm").innerHTML='<button class="x" data-close="1">Close</button><div class="meta">'+N[k.d]+', '+k.lv+', about '+k.h+' hours</div><h2>'+k.t+'</h2><p style="margin:0">'+k.s+'</p><div><h3>What you will learn</h3><ul>'+k.learn.map(function(l){return"<li>"+l+"</li>"}).join("")+'</ul></div><div><h3>In the box</h3><ul>'+k.box.map(function(l){return"<li>"+l+"</li>"}).join("")+'</ul></div><div class="row"><span class="price">'+inr(k.p)+'</span><button class="b1" data-a="'+k.id+'" data-close="1">Add to cart</button></div>';
+$("dlg").showModal()}
+function draw(){var n=0,t=0,h="";Object.keys(cart).forEach(function(id){var k=K.filter(function(z){return z.id==id})[0],q=cart[id];n+=q;t+=q*k.p;
+h+='<div class="it"><b>'+k.t+'</b><span>'+inr(q*k.p)+'</span><div class="qty"><button data-m="'+id+'" aria-label="Remove one">-</button><span>'+q+'</span><button data-p="'+id+'" aria-label="Add one">+</button></div></div>'});
+$("items").innerHTML=h||'<p class="meta">Your cart is empty. Add a kit to get started.</p>';
+$("total").textContent=inr(t);$("cartbtn").innerHTML='<svg class="ico" aria-hidden="true"><use href="#i-cart"/></svg> Cart ('+n+')';$("checkout").disabled=!n}
+document.addEventListener("click",function(e){var b=e.target.closest("button");if(!b)return;var d=b.dataset;
+if(d.d){st.d=d.d;st.n=12;tabs();grid()}
+if(d.l){st.lv=d.l;st.n=12;tabs();grid()}if(d.more){st.n+=12;grid()}
+if(d.save){saved[d.save]=!saved[d.save];if(!saved[d.save])delete saved[d.save];saveState();grid()}
+if(b.id==="savedbtn"){st.savedOnly=!st.savedOnly;st.n=12;grid()}
+if(b.id==="themebtn"){var dark=document.documentElement.getAttribute("data-theme")==="dark";document.documentElement.setAttribute("data-theme",dark?"light":"dark");try{localStorage.setItem("kitbench-theme",dark?"light":"dark")}catch(e){}}
+if(b.id==="resetfilters"){st.d="all";st.lv="all";st.q="";st.savedOnly=false;st.n=12;$("q").value="";tabs();grid()}
+if(d.v)show(d.v);
+if(d.a){cart[d.a]=(cart[d.a]||0)+1;draw();$("cart").classList.add("open");$("note").textContent=""}
+if(d.p){cart[d.p]++;draw()}
+if(d.m){if(--cart[d.m]<1)delete cart[d.m];draw()}
+if(d.close)$("dlg").close();
+if(b.id=="cartbtn")$("cart").classList.add("open");
+if(b.id=="closecart")$("cart").classList.remove("open");
+if(b.id=="checkout"){$("cart").classList.remove("open");openCo()}});
+$("dlg").addEventListener("click",function(e){if(e.target==this)this.close()});
+var X={robotics:[`Wave-to-move hand-wave car
+Smart blind stick with obstacle buzzer
+Automatic hand sanitizer dispenser robot
+Touch-controlled robot car
+Magnetic-sensor wheel counter bot
+Cardboard robotic arm with syringe hydraulics
+Pet-feeder robot with servo gate
+Temperature-aware cooling fan robot
+Rotating radar with buzzer alert
+Mini bulldozer with servo blade
+Voice-greeting door robot
+Bluetooth-controlled robotic gripper
+Shadow-follower robot
+Tank-drive robot with caterpillar tracks
+Pocket robot with ultrasonic eyes
+Table-tennis ball launcher bot
+Automatic curtain opener
+Smart dustbin with fill-level alert
+Remote-controlled boat
+Robotic cat toy with laser pointer
+Knock-detecting guard robot
+Mini crane with servo hoist
+Self-stopping toy car
+Color-detecting mini robot
+Joystick pan-tilt camera mount
+Automatic tap robot with IR sensor
+Mini robot vacuum with brush motor
+Robotic eyes that follow your hand
+Robotic snake with two servos
+Seesaw balancing toy robot
+Robotic piano finger player
+Line-drawing wheel robot
+Night patrol robot with LED lights`,`RFID-controlled robot car
+Bluetooth-controlled robotic arm
+Automatic floor-cleaning robot
+Flex-sensor gesture robotic arm
+Gas-sensing patrol robot
+Farm monitoring robot with temperature and humidity logging
+Seed-sowing agriculture robot
+Smart trolley that follows the shopper
+Metal-detecting robot
+Voice-controlled robotic arm
+Delivery robot with line and obstacle sensing
+Line follower with junction detection
+Robot lawn mower prototype
+Solar-powered rover
+Stair-climbing robot prototype
+Hazard-inspection rover with robotic arm
+Automatic parking-gate robot
+Barcode-scanning shelf robot
+Mobile robot with Wi-Fi telemetry dashboard
+Android-controlled camera robot
+Robotic fish with tail servo
+Tracked tank with turret
+Pill-dispensing robot
+Smart waste-segregating robot
+Obstacle-aware robotic arm
+Radar-based mapping rover
+Rocker-bogie rover chassis
+Window-cleaning robot prototype
+Table-tennis ball picker
+Robot car with automatic headlights and wipers
+Hospital medicine-delivery robot
+Gesture-controlled wheelchair prototype
+Chess-move indicator robot arm
+Joystick-controlled excavator model`,`Autonomous agricultural robot with soil sensing
+SLAM-based indoor delivery robot
+AI-powered waste-sorting robotic arm
+Autonomous drone with GPS waypoint navigation
+Human-following robot with computer vision
+Disaster-rescue robot with live video and gas sensing
+Robotic wheelchair with obstacle avoidance and voice control
+Autonomous underwater vehicle prototype
+Fruit-picking robotic arm with vision
+Autonomous hospital supply robot with map-based navigation
+Solar panel cleaning robot
+Robotic glove for hand rehabilitation
+Autonomous parking robot with vision
+Multi-robot swarm coordination system
+Reinforcement-learning balancing robot
+Autonomous racing car with lane detection
+Wall-climbing inspection robot
+EEG-controlled robotic arm
+Autonomous greenhouse monitoring rover
+Telepresence robot controlled over the internet
+Gesture and speech controlled humanoid upper body
+Warehouse inventory robot with RFID
+Robotic arm that draws portraits from images
+Cable-driven robot camera system
+Autonomous lawn mower with GPS boundary
+Pipe leak-detection crawler
+Quadruped robot dog with gait control
+Robot barista arm for serving drinks
+Indoor navigation robot to guide the visually impaired
+Fire-fighting drone prototype with thermal camera
+Automated storage and retrieval system model
+Self-driving toy car using deep learning
+Solar-tracking rover for terrain mapping`],embedded:[`Digital thermometer with fever alert
+LDR-based street light controller
+Electronic lock with push buttons
+Smart school bell timer
+Water-level indicator with LEDs
+Tilt alarm for bags
+Mini weighing scale with load cell
+People counter with IR sensor
+Stepper motor controller
+Smart doorbell with melody
+Humidity monitor with LCD
+Simple capacitance meter
+Room light dimmer with PWM
+Fire alarm with flame sensor
+Sound-activated light switch
+LED running text display
+Simple function generator
+Battery level indicator
+Sunrise alarm clock with gradual light
+3x3x3 LED cube
+Reaction timer game
+Touch lamp using capacitive sensing
+Smart pill reminder with buzzer
+Reverse parking sensor
+Smart wardrobe light with door sensor
+Music box with buzzer tunes
+Pedometer with accelerometer
+Automatic fan speed regulator
+Plant light meter
+Seven-segment countdown timer
+Remote-controlled LED strip
+Laser security alarm
+Digital compass display
+Water flow meter`,`Voice-controlled smart home hub
+IoT air quality monitor
+Smart parking system with slot display
+Biometric attendance with cloud sheet
+Health monitoring band with BLE
+Vehicle accident alert with GPS and GSM
+Smart dustbin with SMS alert
+IoT water quality monitor
+Wireless notice board over Wi-Fi
+Digital weighing scale with Bluetooth
+Smart irrigation with weather logic
+GSM-based home security
+Solar charge controller with display
+Cold-chain temperature logger
+Smart street light with traffic sensing
+Bluetooth proximity door unlock
+Wireless remote with nRF24 modules
+Smart cradle with sound-triggered rocking
+Machine health monitor with vibration sensing
+Electronic voting machine model
+Smart shopping cart with RFID billing
+Capacitive touch keypad lock
+Wi-Fi-controlled RGB lighting
+Automatic bell with RTC scheduler
+Fuel level monitor with display
+Smart helmet with accident detection
+Gesture-controlled presentation clicker
+Wireless energy-meter reader
+ECG signal acquisition and display
+Cloud-connected soil monitor
+Digital notice board updated by GSM
+Traffic signal with vehicle density sensing
+Wi-Fi smart plug with power monitoring`,`IoT smart agriculture system with cloud analytics
+Smart grid monitoring with energy forecasting
+Real-time patient monitoring with alerts
+Vehicle tracking and anti-theft system
+Edge-AI predictive maintenance node
+Campus attendance with face recognition on ESP32-CAM
+Industrial IoT gateway with dashboards
+Wearable fall-detection device
+Energy-efficient building controller
+Autonomous irrigation with machine-learning forecasts
+EV battery management system prototype
+Wireless EV charging demonstrator
+Driver drowsiness detection system
+Smart wheelchair with health monitoring
+LoRaWAN flood early-warning system
+Tamper-evident logging for cold storage
+Smart meter with prepaid billing
+Hand-gesture recognition on a microcontroller
+Smart helmet with crash detection and rescue alert
+Remote ECG monitoring over the cloud
+Voice-assistant device on ESP32
+Real-time power quality analyzer
+Smart waste management with route optimization
+Environmental monitoring buoy
+CubeSat-style telemetry model
+Smart lock with BLE and rolling codes
+Multi-sensor weather balloon payload
+Motor monitoring with fault prediction
+Smart traffic management with emergency vehicle priority
+Solar microgrid controller with MPPT
+Gesture-controlled smart home hub
+Wireless sensor network with mesh routing
+Portable ECG and SpO2 monitor with app`],vlsi:[`Half and full subtractor
+2-bit comparator
+3-to-8 decoder
+8-to-1 multiplexer
+4-bit parity checker with LED
+SR latch and gated latch
+Master-slave flip-flop
+4-bit binary counter
+Mod-10 decade counter
+Ring counter
+Johnson counter
+4-bit shift register with load
+Binary to BCD converter
+BCD to seven-segment display
+Two-digit counter on seven-segment
+Clap switch logic
+Traffic signal with pedestrian button
+Simple door lock FSM
+LED blink with adjustable speed
+4-bit adder-subtractor
+Magnitude comparator display
+Majority-vote circuit
+Odd-even number detector
+Vending logic with two coins
+2-bit multiplier
+Small 4x4 RAM
+ROM lookup table display
+Digital lock with 4-bit code
+Dice roller with LFSR
+Frequency divider with selectable ratio
+Rotating LED display pattern
+Water tank controller logic
+Tic-tac-toe winner detector`,`8-bit ALU with flags
+Wallace-tree multiplier
+Carry-lookahead adder
+Carry-select adder
+Restoring divider
+16-bit shift-add multiplier
+UART with baud-rate generator and FIFO
+SPI flash reader
+I2C temperature-sensor reader
+PWM-controlled servo driver
+Digital clock with alarm
+LCD controller
+Keypad scanner with debouncing
+VGA text display
+Round-robin arbiter
+Dual-port RAM
+Register file with two read ports
+Instruction decoder for a simple CPU
+Stack and queue memory units
+Four-way junction traffic controller
+ATM controller FSM
+Parking-slot management FSM
+Moving-average filter
+Ultrasonic pulse-width reader
+Manchester encoder and decoder
+CRC generator and checker
+Hamming code encoder and decoder
+Frequency counter
+Binary-to-decimal converter with double-dabble
+Sine-wave generator using lookup table
+Digital lock with timeout FSM
+SPI-controlled ADC reader
+Snake game on VGA`,`32-bit RISC-V processor with interrupts
+Superscalar processor model
+Branch predictor design
+Multi-core RISC-V with shared memory
+Network-on-chip router
+Memory controller with request scheduling
+USB 2.0 device controller
+PCIe-lite endpoint model
+JPEG encoder on FPGA
+Motion estimation block for video
+Neural-network inference engine
+Systolic-array matrix multiplier
+SHA-256 hashing core
+RSA modular exponentiation core
+Low-power SRAM design in SkyWater 130 nm
+8-bit SAR ADC layout and simulation
+Phase-locked loop design
+Bandgap reference circuit design
+Op-amp design and layout
+Standard-cell library characterization
+Tape-out-ready design with OpenLane
+Formal verification of a RISC-V core
+UVM testbench for an AXI interconnect
+Hardware-software co-design on Zynq
+FPGA-based software-defined radio
+Real-time object detection on FPGA
+LDPC decoder
+Reed-Solomon encoder and decoder
+Image compression accelerator
+MIPS pipeline with forwarding unit
+Low-power clock-gating design study
+Video scaler and display controller
+Audio synthesizer on FPGA
+Design-for-test with scan chain insertion`]},DS=["A hands-on mini project with a step-by-step build guide.","An average-level project with a full build guide and source code.","A final year project with source code, a build guide and a project report outline."];
+Object.keys(X).forEach(function(d){var n=50;X[d].forEach(function(blk,g){blk.split("\n").forEach(function(t,j){n++;K.push({id:PX[d]+n,d:d,lv:LV[g],h:[4,10,40][g]+j%3,p:PR[d][g]+(j%5)*100,t:t,s:DS[g],learn:LN[d],box:BX[d][g]})})})});
+/* ===== KITBENCH SETTINGS: edit only these two values =====
+   apiBase: your Render backend URL (no trailing slash)
+   razorpayKeyId: your Razorpay Key ID only (starts with rzp_test_ or rzp_live_). NEVER put the secret here. */
+/* Calls the backend and always returns JSON. Render's free plan sleeps and answers with an HTML page while it wakes up, so retry a couple of times. */
+async function kbFetchJson(url,opts){for(var i=0;i<3;i++){var res=await fetch(url,opts),t=await res.text();try{var d=JSON.parse(t);return {ok:res.ok,status:res.status,json:async function(){return d}}}catch(e){if(i<2)await new Promise(function(ok){setTimeout(ok,8000)})}}throw new Error('The KitBench server is waking up or not reachable. Please wait one minute and try again.')}
+var KB_SETTINGS={apiBase:"https://kitbench-api.onrender.com",razorpayKeyId:"rzp_test_ToGKKXdbV8RgND",couponsLive:false}; /* set couponsLive:true ONLY after your server validates the "coupon" field and recomputes the amount */
+window.KITBENCH_API_BASE=KB_SETTINGS.apiBase;
+var RZP={key:KB_SETTINGS.razorpayKeyId||"YOUR_RAZORPAY_KEY_ID",orderUrl:KB_SETTINGS.apiBase+"/api/create-order",verifyUrl:KB_SETTINGS.apiBase+"/api/verify-payment",shop:"KitBench"};
+function tot(){var t=0;Object.keys(cart).forEach(function(id){t+=cart[id]*K.filter(function(z){return z.id==id})[0].p});return t}
+function openCo(){var h="",t=KB_SETTINGS.couponsLive?checkoutTotal():tot();
+Object.keys(cart).forEach(function(id){var k=K.filter(function(z){return z.id==id})[0];h+='<div class="it"><span>'+k.t+' x '+cart[id]+'</span><span>'+inr(cart[id]*k.p)+'</span></div>'});
+$("com").innerHTML='<button class="x" id="coc" type="button">Close</button><h2>Checkout</h2><div class="items">'+h+'</div>'+(KB_SETTINGS.couponsLive&&kbCoupon?'<p class="note">Coupon '+kbEsc(kbCoupon.code)+' applied: '+kbCoupon.discount+'% off</p>':'')+'<div class="tot"><span>Total</span><span>'+inr(t)+'</span></div><form id="cof" style="display:grid;gap:12px"><label class="f">Full name<input name="name" required autocomplete="name"></label><label class="f">Email<input name="email" type="email" required autocomplete="email"></label><label class="f">Phone<input name="phone" type="tel" required pattern="[0-9+ ]{10,14}" autocomplete="tel"></label><label class="f">Delivery address with pincode<textarea name="address" rows="3" required autocomplete="street-address"></textarea></label><fieldset style="border:1px solid var(--line,#8884);border-radius:12px;padding:10px 12px;display:grid;gap:8px"><legend>Payment method</legend><label style="display:flex;gap:8px;align-items:center"><input type="radio" name="method" value="online" checked> Pay online (UPI, card, netbanking)</label><label style="display:flex;gap:8px;align-items:center"><input type="radio" name="method" value="cod"> Cash on delivery (up to ₹20,000)</label></fieldset><button class="b1" id="cobtn" style="padding:12px" type="submit">Pay '+inr(t)+' with Razorpay</button><p class="note" id="pn"></p></form>';
+$("coc").onclick=function(){$("co").close()};
+var cobtn=$("cobtn");$("cof").onchange=function(e){if(e.target.name==="method")cobtn.textContent=e.target.value==="cod"?"Place order (cash on delivery) · "+inr(t):"Pay "+inr(t)+" with Razorpay"};
+$("cof").onsubmit=function(e){e.preventDefault();var d=new FormData(e.target),o={name:d.get("name"),email:d.get("email"),phone:d.get("phone"),address:d.get("address")};if(d.get("method")==="cod")placeCod(o,t);else pay(o,t)};
+$("co").showModal()}
+function placeCod(o,t){var n=$("pn"),b=$("cobtn");if(!KB_SETTINGS.apiBase){n.textContent="Ordering is not available yet. The site owner must connect the KitBench server.";return}
+ b.disabled=true;n.textContent="Placing your order…";
+ kbFetchJson(KB_SETTINGS.apiBase+"/api/orders/cod",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({items:Object.keys(cart).map(function(id){return {id:id,quantity:cart[id]}}),coupon:KB_SETTINGS.couponsLive&&kbCoupon?kbCoupon.code:undefined,customer:o})})
+ .then(function(r){return r.json().then(function(d){if(!r.ok)throw new Error(d.error||"Could not place the order.");return d})})
+ .then(function(d){try{var hist=JSON.parse(localStorage.getItem("kb-orders")||"[]");hist.unshift({date:new Date().toLocaleString(),paymentId:d.ref,items:Object.keys(cart).map(function(id){var k=K.filter(function(z){return z.id==id})[0];return {title:k?k.t:id,quantity:cart[id]}}),total:d.total,status:"Cash on delivery · order placed"});localStorage.setItem("kb-orders",JSON.stringify(hist.slice(0,50)))}catch(e){}
+  cart={};draw();$("com").innerHTML='<h2>Order placed</h2><p>Pay in cash when your kits are delivered.</p><p class="note">Order number: <b></b></p><button class="b1" id="cod" style="padding:12px">Back to kits</button>';$("com").querySelector("b").textContent=d.ref;$("cod").onclick=function(){$("co").close()}})
+ .catch(function(err){b.disabled=false;n.textContent=err.message||"Could not place the order."})}
+function pay(o,t){
+ var n=$("pn");
+ if(!window.Razorpay){n.textContent="Payment checkout could not load. Check your internet connection and try again.";return}
+ if(!RZP.key||RZP.key==="YOUR_RAZORPAY_KEY_ID"||!RZP.orderUrl||!RZP.verifyUrl){n.textContent="Online payment is not configured yet. The site owner must add a Razorpay Key ID and deploy the secure payment API before accepting payments.";return}
+ n.textContent="Creating a secure payment order…";
+ kbFetchJson(RZP.orderUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({amount:t*100,currency:"INR",coupon:KB_SETTINGS.couponsLive&&kbCoupon?kbCoupon.code:undefined,items:Object.keys(cart).map(function(id){return {id:id,quantity:cart[id]}}),customer:{name:o.name,email:o.email,phone:o.phone,address:o.address}})})
+ .then(function(r){if(!r.ok)throw new Error("Could not create payment order.");return r.json()})
+ .then(function(order){if(!order.id)throw new Error("The payment server did not return an order ID.");
+   var rz=new Razorpay({key:RZP.key,amount:order.amount||t*100,currency:order.currency||"INR",name:RZP.shop,description:"Project kits",order_id:order.id,prefill:{name:o.name,email:o.email,contact:o.phone},notes:{address:o.address},theme:{color:"#10201E"},modal:{ondismiss:function(){n.textContent="Payment was cancelled. Your cart is unchanged."}},handler:function(r){n.textContent="Verifying payment securely…";
+     kbFetchJson(RZP.verifyUrl,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({razorpay_order_id:r.razorpay_order_id,razorpay_payment_id:r.razorpay_payment_id,razorpay_signature:r.razorpay_signature,customer:{name:o.name,email:o.email,phone:o.phone,address:o.address}})})
+     .then(function(v){if(!v.ok)throw new Error("Payment verification failed. Please contact support before retrying.");return v.json()})
+     .then(function(v){if(!v.verified)throw new Error("Payment could not be verified. Your cart has been kept.");try{var hist=JSON.parse(localStorage.getItem("kb-orders")||"[]");hist.unshift({date:new Date().toLocaleString(),paymentId:r.razorpay_payment_id,items:Object.keys(cart).map(function(id){var k=K.filter(function(z){return z.id==id})[0];return {title:k?k.t:id,quantity:cart[id]}}),total:t,status:"Verified payment"});localStorage.setItem("kb-orders",JSON.stringify(hist.slice(0,50)))}catch(e){}cart={};draw();$("com").innerHTML='<h2>Payment verified</h2><p>Your payment has been verified by the server.</p><p class="note">Payment ID: <b></b></p><button class="b1" id="cod" style="padding:12px">Back to kits</button>';$('com').querySelector('b').textContent=r.razorpay_payment_id;$("cod").onclick=function(){$("co").close()};})
+     .catch(function(err){n.textContent=err.message||"Could not verify payment. Please contact support and do not pay again yet.";});
+   }});
+   rz.on("payment.failed",function(){n.textContent="Payment failed. Your cart is unchanged; you can retry or choose another payment method."});rz.open();n.textContent="Complete payment in the Razorpay window.";
+ }).catch(function(err){n.textContent=(err&&err.message)||"Could not start payment. Please try again later.";});
+}
+$("q").addEventListener("input",function(){st.q=this.value.toLowerCase();st.n=12;grid()});
+$("sort").addEventListener("change",function(){st.sort=this.value;st.n=12;grid()});
+try{var savedTheme=localStorage.getItem("kitbench-theme");if(savedTheme)document.documentElement.setAttribute("data-theme",savedTheme)}catch(e){}
+
+// Feature suite: browser-local prototype. Production accounts, orders and admin actions need a server/database.
+var kbCoupon=null;
+function kbRead(key,fallback){try{var v=JSON.parse(localStorage.getItem(key)||'null');return v==null?fallback:v}catch(e){return fallback}}
+function kbWrite(key,val){try{localStorage.setItem(key,JSON.stringify(val));return true}catch(e){return false}}
+function kbEsc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function checkoutTotal(){var subtotal=tot();if(!kbCoupon)return subtotal;return Math.max(0,Math.round(subtotal*(1-kbCoupon.discount/100)))}
+function kbOpen(html){$('featureContent').innerHTML='<button class="close-feature" type="button" id="closeFeature">Close ✕</button>'+html;$('closeFeature').onclick=function(){$('featureDlg').close()};$('featureDlg').showModal()}
+function kbProjectOptions(){return K.map(function(k){return '<option value="'+kbEsc(k.id)+'">'+kbEsc(k.t)+'</option>'}).join('')}
+function kbTool(which){
+ if(which==='account'){
+  kbAuthScreen('register');
+ }else if(which==='orders'){
+  var orders=kbRead('kb-orders',[]);kbOpen('<h2>My orders</h2><p class="muted-note">Only orders recorded in this browser are shown. A server-side order database is needed for cross-device history.</p>'+(orders.length?'<div class="feature-list">'+orders.map(function(o){return '<div class="feature-row"><b>'+kbEsc(o.status||'Order')+' · '+kbEsc(o.date)+'</b><p>'+kbEsc((o.items||[]).map(function(i){return i.title+' × '+i.quantity}).join(', '))+'</p><p><b>'+inr(Number(o.total)||0)+'</b> · Payment ID: '+kbEsc(o.paymentId||'Not available')+'</p></div>'}).join('')+'</div>':'<div class="feature-row">No orders recorded yet. After a real payment is verified, the order will appear here in this browser.</div>'));
+ }else if(which==='reviews'){
+  var reviews=kbRead('kb-reviews',[]);kbOpen('<h2>Project ratings & reviews</h2><form id="kbReviewForm"><label>Project<select name="project">'+kbProjectOptions()+'</select></label><label>Rating<select name="rating"><option value="5">★★★★★ — Excellent</option><option value="4">★★★★ — Good</option><option value="3">★★★ — Okay</option><option value="2">★★ — Needs work</option><option value="1">★ — Poor</option></select></label><label>Your review<textarea name="review" required maxlength="500" rows="3" placeholder="What was useful about this project?"></textarea></label><button class="tool-action" type="submit">Save review</button></form><h3>Recent reviews</h3>'+(reviews.length?'<div class="feature-list">'+reviews.slice(0,20).map(function(r){return '<div class="feature-row"><b>'+kbEsc(r.project)+'</b><div class="star-rating">'+('★'.repeat(Number(r.rating)||0))+('☆'.repeat(5-(Number(r.rating)||0)))+'</div><p>'+kbEsc(r.review)+'</p><span class="muted-note">'+kbEsc(r.date||'')+'</span></div>'}).join('')+'</div>':'<p class="muted-note">No reviews yet. Be the first to share feedback.</p>'));
+  $('kbReviewForm').onsubmit=function(e){e.preventDefault();var f=new FormData(e.target),k=K.filter(function(x){return x.id===f.get('project')})[0];reviews.unshift({project:k?k.t:'Project kit',rating:Number(f.get('rating')),review:f.get('review'),date:new Date().toLocaleDateString()});kbWrite('kb-reviews',reviews);kbTool('reviews')};
+ }else if(which==='project-request'){
+  var requests=kbRead('kb-project-requests',[]);
+  kbOpen('<h2>Request a project not in the list</h2><p class="muted-note">Tell us what you want to build. Include the board or technology if you know it. Your request is sent to KitBench, and a copy is kept in this browser.</p><form id="kbProjectRequestForm"><label>Project name or idea<input name="title" required maxlength="120" placeholder="e.g. Smart irrigation using ESP32"></label><div class="admin-grid"><label>Area<select name="category"><option>Robotics</option><option>Embedded systems / IoT</option><option>VLSI / FPGA</option><option>AI / Machine Learning</option><option>Other</option></select></label><label>Level<select name="level"><option>Beginner</option><option>Intermediate</option><option>Final year</option></select></label></div><label>Board / components (optional)<input name="hardware" maxlength="160" placeholder="e.g. Arduino UNO, ESP32, sensors"></label><label>What should the project do?<textarea name="details" rows="3" maxlength="700" placeholder="Describe the features, output or problem you want to solve."></textarea></label><label>Your email (optional)<input name="email" type="email" maxlength="120" placeholder="For follow-up, if supported later"></label><button class="tool-action" type="submit">Save project request</button></form><h3>Your saved requests</h3>'+(requests.length?'<div class="feature-list">'+requests.slice().reverse().map(function(r){return '<div class="feature-row"><b>'+kbEsc(r.title)+'</b><p>'+kbEsc(r.category)+' · '+kbEsc(r.level)+' · '+kbEsc(r.date)+'</p><p>'+kbEsc(r.details||'No extra details provided')+'</p><span class="muted-note">Status: '+kbEsc(r.status||'Saved')+'</span></div>'}).join('')+'</div>':'<p class="muted-note">You have not submitted a request in this browser yet.</p>'));
+  $('kbProjectRequestForm').onsubmit=async function(e){e.preventDefault();var f=new FormData(e.target),btn=e.target.querySelector('button[type=submit]'),rec={title:String(f.get('title')||'').trim(),category:String(f.get('category')),level:String(f.get('level')),hardware:String(f.get('hardware')||'').trim(),details:String(f.get('details')||'').trim(),email:String(f.get('email')||'').trim(),date:new Date().toLocaleDateString(),status:'Saved in this browser only'};btn.disabled=true;btn.textContent='Sending…';try{var r=await kbFetchJson(KB_SETTINGS.apiBase+'/api/project-requests',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(rec)});var d=await r.json();if(!r.ok)throw new Error(d.error||'Could not send');rec.status='Sent to KitBench'}catch(err){if(err.message!=='Failed to fetch'){alert(err.message);btn.disabled=false;btn.textContent='Save project request';return}}requests.push(rec);kbWrite('kb-project-requests',requests);kbTool('project-request')};
+ }else if(which==='coupons'){
+  kbOpen('<h2>Student coupons</h2><p>Try a sample code to preview the discount at checkout.</p><div class="feature-row"><b>STUDENT10</b><p>10% off eligible kits · sample code</p></div><div class="feature-row"><b>KITBENCH15</b><p>15% off eligible kits · sample code</p></div><form id="kbCouponForm"><label>Coupon code<input name="coupon" placeholder="STUDENT10" maxlength="30" required></label><button class="tool-action" type="submit">Apply coupon</button></form><p id="kbCouponMsg" class="muted-note"></p><p class="muted-note">These are front-end demo coupons. Before accepting real payments, configure and validate coupon eligibility on the payment server.</p>');
+  $('kbCouponForm').onsubmit=function(e){e.preventDefault();var code=new FormData(e.target).get('coupon').trim().toUpperCase(),codes={'STUDENT10':10,'KITBENCH15':15};if(codes[code]){kbCoupon={code:code,discount:codes[code]};var subtotal=tot();$('kbCouponMsg').textContent=code+' recognised for preview: '+codes[code]+'% off '+inr(subtotal)+' = '+inr(Math.max(0,Math.round(subtotal*(1-codes[code]/100))))+'. '+(KB_SETTINGS.couponsLive?'It will be applied at checkout.':'It is not applied at checkout until server-side coupon validation is enabled (couponsLive).')}else{$('kbCouponMsg').textContent='Coupon not recognised. Try STUDENT10 or KITBENCH15.'}};
+ }else if(which==='admin'){
+  if(!(kbRead('kb-profile',null)&&sessionStorage.getItem('kb-auth-token'))){kbAuthScreen('login','Sign in to open the admin preview.');return}
+  var added=kbRead('kb-admin-projects',[]),all=K.length,requests=kbRead('kb-project-requests',[]);
+  kbOpen('<h2>Admin dashboard · preview</h2><p class="muted-note"><b>Important:</b> this is a browser-only demo, not a secure admin system. Anyone can modify front-end data. Do not use it to manage real payments or customer information until a protected server and database are connected.</p><div class="tool-panel"><div class="tool-card"><h3>Catalog</h3><p>'+all+' built-in project listings</p></div><div class="tool-card"><h3>Local added projects</h3><p>'+added.length+' demo projects</p></div><div class="tool-card"><h3>Browser orders</h3><p>'+kbRead('kb-orders',[]).length+' recorded orders</p></div><div class="tool-card"><h3>Project requests</h3><p>'+requests.length+' saved requests</p></div></div><h3>Student project requests</h3>'+(requests.length?'<div class="feature-list">'+requests.slice().reverse().map(function(r){return '<div class="feature-row"><b>'+kbEsc(r.title)+'</b><p>'+kbEsc(r.category)+' · '+kbEsc(r.level)+' · '+kbEsc(r.date)+'</p><p>'+kbEsc(r.hardware||'No board specified')+'</p><p>'+kbEsc(r.details||'No extra details')+'</p><p>'+kbEsc(r.email||'No email provided')+'</p></div>'}).join('')+'</div>':'<p class="muted-note">No project requests saved in this browser.</p>')+'<h3>Add a project (local preview)</h3><form id="kbAdminForm"><div class="admin-grid"><label>Project name<input name="title" required maxlength="100"></label><label>Price in ₹<input name="price" type="number" min="1" max="100000" required></label><label>Category<select name="category"><option value="robotics">Robotics</option><option value="embedded">Embedded</option><option value="vlsi">VLSI / FPGA</option></select></label><label>Level<select name="level"><option value="Level 1">Level 1</option><option value="Level 2">Level 2</option><option value="Level 3">Level 3</option></select></label></div><label>Short description<textarea name="description" maxlength="300" rows="2"></textarea></label><button class="tool-action" type="submit">Add to local preview</button></form><h3>Local demo projects</h3>'+(added.length?'<div class="feature-list">'+added.map(function(a,i){return '<div class="feature-row"><b>'+kbEsc(a.title)+'</b> · '+inr(a.price)+'<p>'+kbEsc(a.description||'')+'</p><button class="tool-action" data-delete-admin="'+i+'">Remove</button></div>'}).join('')+'</div>':'<p class="muted-note">No custom demo projects added.</p>'));
+  $('kbAdminForm').onsubmit=function(e){e.preventDefault();var f=new FormData(e.target);added.push({title:f.get('title'),price:Number(f.get('price')),category:f.get('category'),level:f.get('level'),description:f.get('description')});kbWrite('kb-admin-projects',added);kbTool('admin')};document.querySelectorAll('[data-delete-admin]').forEach(function(b){b.onclick=function(){added.splice(Number(b.getAttribute('data-delete-admin')),1);kbWrite('kb-admin-projects',added);kbTool('admin')}});
+ }
+}
+
+// Email-verified student authentication. Set window.KITBENCH_API_BASE to the deployed API URL.
+var KB_API_BASE=(window.KITBENCH_API_BASE||'').replace(/\/$/,'');
+function kbAuthScreen(mode,message){
+ var profile=kbRead('kb-profile',null);
+ if(mode==='register'){
+  kbOpen('<h2>Create student account</h2><p class="muted-note">Register with your name, email and password. We will email a 6-digit verification code. You must verify the email before signing in.</p><div id="kbAuthMessage" class="muted-note" role="status">'+kbEsc(message||'')+'</div><form id="kbRegisterForm"><label>Full name<input name="name" required maxlength="80" autocomplete="name"></label><label>Email address<input name="email" type="email" required maxlength="254" autocomplete="email"></label><label>Password<input name="password" type="password" required minlength="8" maxlength="72" autocomplete="new-password"><small>Use at least 8 characters.</small></label><label>Confirm password<input name="confirmPassword" type="password" required minlength="8" maxlength="72" autocomplete="new-password"></label><div class="profile-photo-row"><img id="registerPhotoPreview" class="profile-photo-preview" alt="Profile photo preview" src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 80 80%27%3E%3Crect width=%2780%27 height=%2780%27 rx=%2740%27 fill=%27%23dce8e3%27/%3E%3Ccircle cx=%2740%27 cy=%2729%27 r=%2714%27 fill=%27%2358706a%27/%3E%3Cpath d=%27M14 75c2-17 12-26 26-26s24 9 26 26%27 fill=%27%2358706a%27/%3E%3C/svg%3E"><label style="flex:1">Profile image (optional)<input id="registerPhoto" type="file" accept="image/*"><small>Choose a picture to show in the top bar. Stored only in this browser in this prototype.</small></label></div><button class="tool-action" type="submit">Register and send code</button></form><p>Already registered? <button class="tool-action" type="button" id="kbGoLogin">Open login</button></p>');
+  $('kbGoLogin').onclick=function(){kbAuthScreen('login')};
+  var photoInput=$('registerPhoto'),photoPreview=$('registerPhotoPreview');if(photoInput&&photoPreview){photoInput.onchange=function(){var file=photoInput.files&&photoInput.files[0];if(!file)return;if(!file.type.startsWith('image/')){photoInput.value='';return}if(file.size>3*1024*1024){alert('Please choose an image smaller than 3 MB.');photoInput.value='';return}var reader=new FileReader();reader.onload=function(){var im=new Image();im.onload=function(){var canvas=document.createElement('canvas'),max=240,scale=Math.min(1,max/Math.max(im.width,im.height));canvas.width=Math.round(im.width*scale);canvas.height=Math.round(im.height*scale);canvas.getContext('2d').drawImage(im,0,0,canvas.width,canvas.height);var data=canvas.toDataURL('image/jpeg',0.82);photoPreview.src=data;kbWrite('kb-profile-photo',data);updateKitBenchProfileHeader()};im.src=reader.result};reader.readAsDataURL(file)}}
+  $('kbRegisterForm').onsubmit=async function(e){e.preventDefault();var f=new FormData(e.target),name=String(f.get('name')).trim(),email=String(f.get('email')).trim().toLowerCase(),password=String(f.get('password')),confirmPassword=String(f.get('confirmPassword')),m=$('kbAuthMessage');if(password!==confirmPassword){m.textContent='Passwords do not match. Please re-enter them.';return}if(password.length<8){m.textContent='Password must contain at least 8 characters.';return}m.textContent='Sending verification code…';try{var r=await kbFetchJson(KB_API_BASE+'/api/auth/register',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({name:name,email:email,password:password,confirmPassword:confirmPassword,city:String(kbRead('kb-home-location','')).slice(0,80)})});var d=await r.json();if(!r.ok)throw new Error(d.error||'Registration failed.');if(d.verified){kbAuthScreen('login','Account created. You can now log in.');return}kbAuthScreen('verify', 'A verification code was sent to '+email+'.');var em=$('kbVerifyEmail');if(em)em.value=email;}catch(err){m.textContent=err.message||'Could not connect to the account server. The site owner must deploy and configure the backend email service.'}};
+ }else if(mode==='verify'){
+  var email=(message||'').replace(/^A verification code was sent to /,'').replace(/\.$/,'');
+  kbOpen('<h2>Verify your email</h2><p class="muted-note">Enter the 6-digit code sent to your email address. The code expires after 10 minutes.</p><div id="kbAuthMessage" class="muted-note" role="status"></div><form id="kbVerifyForm"><label>Email address<input id="kbVerifyEmail" name="email" type="email" required autocomplete="email" value="'+kbEsc(email)+'"></label><label>6-digit verification code<input name="code" inputmode="numeric" pattern="[0-9]{6}" minlength="6" maxlength="6" required autocomplete="one-time-code" placeholder="123456"></label><button class="tool-action" type="submit">Verify email and continue to login</button></form><button class="tool-action" id="kbBackRegister" type="button">Back to registration</button>');
+  $('kbBackRegister').onclick=function(){kbAuthScreen('register')};
+  $('kbVerifyForm').onsubmit=async function(e){e.preventDefault();var f=new FormData(e.target),m=$('kbAuthMessage');m.textContent='Verifying code…';try{var r=await kbFetchJson(KB_API_BASE+'/api/auth/verify-email',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:String(f.get('email')).trim().toLowerCase(),code:String(f.get('code')).trim()})});var d=await r.json();if(!r.ok)throw new Error(d.error||'Verification failed.');kbAuthScreen('login','Email verified successfully. You can now log in.');}catch(err){m.textContent=err.message||'Could not verify email.'}};
+ }else if(mode==='login'){
+  kbOpen('<h2>Student login</h2><p class="muted-note">Sign in only after verifying your email address.</p><div id="kbAuthMessage" class="muted-note" role="status">'+kbEsc(message||'')+'</div><form id="kbLoginForm"><label>Email address<input name="email" type="email" required autocomplete="email"></label><label>Password<input name="password" type="password" required autocomplete="current-password"></label><button class="tool-action" type="submit">Login</button></form><p>New to KitBench? <button class="tool-action" id="kbGoRegister" type="button">Create account</button></p>');
+  $('kbGoRegister').onclick=function(){kbAuthScreen('register')};
+  $('kbLoginForm').onsubmit=async function(e){e.preventDefault();var f=new FormData(e.target),m=$('kbAuthMessage');m.textContent='Signing in…';try{var r=await kbFetchJson(KB_API_BASE+'/api/auth/login',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:String(f.get('email')).trim().toLowerCase(),password:String(f.get('password'))})});var d=await r.json();if(!r.ok)throw new Error(d.error||'Login failed.');sessionStorage.setItem('kb-auth-token',d.token);kbWrite('kb-profile',{name:d.user.name,email:d.user.email,verified:true});updateKitBenchProfileHeader();if(window.kbRequestLiveLocation)window.kbRequestLiveLocation();kbOpen('<h2>Welcome to KitBench, '+kbEsc(d.user.name)+'!</h2><p>Your email is verified and you are signed in.</p><p class="muted-note">This session is stored in this browser tab. Account data is managed by the backend.</p><button class="tool-action" id="kbDoneLogin" type="button">Continue</button><button class="tool-action" id="kbSignoutNow" type="button">Sign out</button>');$('kbDoneLogin').onclick=function(){$('featureDlg').close()};$('kbSignoutNow').onclick=function(){sessionStorage.removeItem('kb-auth-token');localStorage.removeItem('kb-profile');updateKitBenchProfileHeader();kbAuthScreen('login','You have signed out.')};}catch(err){m.textContent=err.message||'Could not connect to the account server.'}};
+ }
+}
+
+function updateKitBenchProfileHeader(){
+ var profile=kbRead('kb-profile',null),avatar=$('profileAvatar'),label=$('profileLabel'),photo=kbRead('kb-profile-photo','');
+ if(avatar&&photo){avatar.src=photo}else if(avatar){avatar.src="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 80 80%27%3E%3Crect width=%2780%27 height=%2780%27 rx=%2740%27 fill=%27%23dce8e3%27/%3E%3Ccircle cx=%2740%27 cy=%2729%27 r=%2714%27 fill=%27%2358706a%27/%3E%3Cpath d=%27M14 75c2-17 12-26 26-26s24 9 26 26%27 fill=%27%2358706a%27/%3E%3C/svg%3E"}
+ if(label)label.textContent=profile&&profile.name?profile.name.split(/\s+/)[0]:'Profile';
+ // Hide Sign up and Student account entries while signed in; show them again after sign out.
+ var signedIn=!!(profile&&profile.verified&&sessionStorage.getItem('kb-auth-token'));
+ var su=$('signupTop');if(su)su.style.display=signedIn?'none':'';
+ document.querySelectorAll('[data-tool="account"]').forEach(function(b){var card=b.closest('.tool-card');(card||b).style.display=signedIn?'none':''});
+}
+
+// Live location can be requested from the header button or after successful sign-in.
+(function initLiveLocation(){
+ var btn=document.getElementById('liveLocationBtn'),status=document.getElementById('liveLocationStatus');
+ if(!btn||!status)return;
+ window.kbRequestLiveLocation=function(){
+  if(!navigator.geolocation){status.textContent='Live location is not supported by this browser.';return;}
+  btn.disabled=true;status.textContent='Requesting location permission…';
+  navigator.geolocation.getCurrentPosition(async function(pos){
+   var lat=pos.coords.latitude,lon=pos.coords.longitude;
+   status.textContent='Finding your area…';
+   try{
+    var url='https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat='+encodeURIComponent(lat)+'&lon='+encodeURIComponent(lon)+'&zoom=10&addressdetails=1';
+    var res=await fetch(url,{headers:{'Accept':'application/json'}});
+    if(!res.ok)throw new Error('Location lookup unavailable');
+    var data=await res.json(),a=data.address||{};
+    var area=a.city||a.town||a.village||a.municipality||a.suburb||a.county||a.state_district||'';
+    var region=a.state||a.region||a.country||'';
+    var place=[area,region].filter(function(x,i,arr){return x&&arr.indexOf(x)===i}).join(', ');
+    if(!place)place=data.name||'Your current area';
+    btn.textContent='📍 '+place;kbWrite('kb-home-location',place);
+    status.textContent='Live location updated just now. Tap to refresh.';
+   }catch(err){
+    btn.textContent='📍 Location detected';
+    status.textContent='Could not find your area name. Approximate coordinates: '+lat.toFixed(2)+', '+lon.toFixed(2)+'. Tap to refresh.';
+   }finally{btn.disabled=false;}
+  },function(err){
+   btn.disabled=false;
+   if(err.code===1)status.textContent='Location permission was denied. Allow location in your browser settings and tap the location button to try again.';
+   else if(err.code===2)status.textContent='Your location could not be determined. Check device location settings and try again.';
+   else status.textContent='Location request timed out. Please tap to try again.';
+  },{enableHighAccuracy:false,timeout:12000,maximumAge:60000});
+ };
+ btn.addEventListener('click',window.kbRequestLiveLocation);
+})();
+
+(function initHomeLocation(){var field=$('homeLocation'),status=$('locationStatus'),saved=kbRead('kb-home-location','');if(field&&saved)field.value=saved;if(status&&saved)status.textContent='Saved location: '+saved+'. You can change it any time.';var btn=$('saveLocation');if(btn)btn.onclick=function(){var value=String(field.value||'').trim();if(!value){status.textContent='Enter a city or PIN code first.';return}kbWrite('kb-home-location',value);status.textContent='Saved location: '+value+'. This is stored in this browser only.'};})();
+$('signupTop').addEventListener('click',function(){kbAuthScreen('register')});
+$('profileTop').addEventListener('click',function(){var p=kbRead('kb-profile',null);if(p&&p.verified){kbOpen('<div class="profile-photo-row"><img class="profile-photo-preview" alt="Your profile image" src="'+kbEsc(kbRead('kb-profile-photo',''))+'"><div><h2>'+kbEsc(p.name||'Student')+'</h2><p class="muted-note">'+kbEsc(p.email||'')+' · Email verified</p></div></div><label>Change profile image<input id="profilePhotoChange" type="file" accept="image/*"></label><p class="muted-note">Profile image is stored in this browser only. For cross-device profiles, connect a backend storage service.</p><button class="tool-action" id="profileSignout" type="button">Sign out</button>');var fi=$('profilePhotoChange');fi.onchange=function(){var file=fi.files&&fi.files[0];if(!file)return;if(!file.type.startsWith('image/')||file.size>3*1024*1024){alert('Choose an image under 3 MB.');fi.value='';return}var reader=new FileReader();reader.onload=function(){var im=new Image();im.onload=function(){var c=document.createElement('canvas'),scale=Math.min(1,240/Math.max(im.width,im.height));c.width=Math.round(im.width*scale);c.height=Math.round(im.height*scale);c.getContext('2d').drawImage(im,0,0,c.width,c.height);kbWrite('kb-profile-photo',c.toDataURL('image/jpeg',.82));updateKitBenchProfileHeader();$('featureDlg').close();$('profileTop').click()};im.src=reader.result};reader.readAsDataURL(file)};$('profileSignout').onclick=function(){sessionStorage.removeItem('kb-auth-token');localStorage.removeItem('kb-profile');updateKitBenchProfileHeader();kbAuthScreen('login','You have signed out.')};}else{kbAuthScreen('login')}});
+updateKitBenchProfileHeader();
+
+document.querySelectorAll('[data-tool]').forEach(function(b){b.addEventListener('click',function(){kbTool(b.getAttribute('data-tool'))})});
+
+tabs();grid();draw();
+</script>
+<script>
+/* KitBench 3D hero v2: an armored robot suit assembles from plates, gears, tools and glowing wires, then changes suit colors. */
+(function(){
+var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches,sc=document.createElement('script'),introOn=document.documentElement.classList.contains('kb-intro'),skipFn=null,capEl=null,lgItems=null,PL=[['Armor plates',.25],['Helmet',.4],['Arms and hands',.55],['Legs and boots',.7],['Gears and bolts',.82],['Glowing wires',.93],['Power core online',1]];
+function clearIntro(){var de=document.documentElement,was=de.classList.contains('kb-intro');de.classList.remove('kb-intro');if(was){de.classList.add('kb-reveal');setTimeout(function(){de.classList.remove('kb-reveal')},2600)}['kbSkip','kbIntroTxt','kbParts'].forEach(function(i){var x=document.getElementById(i);if(x)x.remove()});var v=document.getElementById('kbVeil');if(v){v.style.opacity=0;setTimeout(function(){v.remove()},1300)}}
+if(introOn){var sb=document.createElement('button');sb.id='kbSkip';sb.type='button';sb.textContent='Skip intro ›';sb.onclick=function(){skipFn?skipFn():clearIntro()};document.body.appendChild(sb);var tx=document.createElement('div');tx.id='kbIntroTxt';tx.textContent='Loose parts drifting in…';document.body.appendChild(tx);capEl=tx;var vl=document.createElement('div');vl.id='kbVeil';document.body.prepend(vl);var lg=document.createElement('div');lg.id='kbParts';lg.setAttribute('aria-hidden','true');lg.innerHTML='<b>Robot parts</b><ul>'+PL.map(function(p){return '<li>'+p[0]+'</li>'}).join('')+'</ul>';document.body.appendChild(lg);lgItems=lg.querySelectorAll('li');setTimeout(clearIntro,24000)}
+function uiIntro(a){if(lgItems)for(var i=0;i<lgItems.length;i++)lgItems[i].classList.toggle('on',a>=PL[i][1]);if(capEl){var m=a<.15?'Loose parts drifting in…':a<.5?'Snapping the armor plates into place…':a<.8?'Fitting arms, legs and gears…':a<.98?'Wiring the glowing power core…':'Robot ready. Opening home…';if(capEl.textContent!==m)capEl.textContent=m}}
+sc.onerror=clearIntro;
+sc.src='https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js';
+sc.onload=function(){try{init()}catch(e){console.warn('3D hero disabled',e);clearIntro();var c=document.getElementById('kbBg');if(c)c.remove()}};
+document.head.appendChild(sc);
+function init(){
+var T=window.THREE,small=innerWidth<700,cv=document.createElement('canvas');cv.id='kbBg';cv.setAttribute('aria-hidden','true');document.body.prepend(cv);
+var R=new T.WebGLRenderer({canvas:cv,alpha:true,antialias:true,powerPreference:'high-performance'});
+R.setPixelRatio(Math.min(devicePixelRatio||1,small?1.25:2));R.outputEncoding=T.sRGBEncoding;R.toneMapping=T.ACESFilmicToneMapping;R.toneMappingExposure=1.15;
+var S=new T.Scene(),C=new T.PerspectiveCamera(36,1,.1,100);C.position.set(0,0,19);
+/* studio reflections so the metal looks real */
+var ec=document.createElement('canvas');ec.width=512;ec.height=256;var cx=ec.getContext('2d'),gr=cx.createLinearGradient(0,0,0,256);gr.addColorStop(0,'#33474f');gr.addColorStop(.5,'#0c1619');gr.addColorStop(1,'#04080a');cx.fillStyle=gr;cx.fillRect(0,0,512,256);
+cx.fillStyle='#fff';cx.globalAlpha=.9;[[40,60,90,30],[200,40,120,24],[360,70,100,34],[470,50,40,60],[120,150,70,16]].forEach(function(r){cx.fillRect(r[0],r[1],r[2],r[3])});
+var et=new T.CanvasTexture(ec);et.mapping=T.EquirectangularReflectionMapping;et.encoding=T.sRGBEncoding;
+var pg=new T.PMREMGenerator(R);S.environment=pg.fromEquirectangular(et).texture;pg.dispose();
+var key=new T.DirectionalLight(0xffffff,1.1);key.position.set(6,8,10);S.add(key);var rim=new T.DirectionalLight(0x58d6bd,.9);rim.position.set(-8,3,-6);S.add(rim);
+var coreL=new T.PointLight(0x7fe8ff,2.2,14);coreL.position.set(0,1.3,2.6);S.add(coreL);
+var G=new T.Group();S.add(G);
+/* suits: primary armor, trim, glow */
+var th=[{p:0xa40f1b,s:0xe3b52f,g:0x7fe8ff},{p:0xcfdadf,s:0x3fd1b4,g:0x58ffd9},{p:0x1f35a0,s:0xf2c14e,g:0xffc36b},{p:0x1a1d22,s:0xff6a1a,g:0xff9a4d}];
+function mt(c,m,r){return new T.MeshStandardMaterial({color:c,metalness:m,roughness:r,envMapIntensity:1.25})}
+var MP=mt(th[0].p,.92,.22),MS=mt(th[0].s,1,.18),MD=mt(0x1b2227,.7,.5),MG=new T.MeshBasicMaterial({color:th[0].g});
+var gc={};function plate(w,h,d){var k=w+'x'+h+'x'+d;if(gc[k])return gc[k];var b=Math.min(w,h,d)*.16,hw=w/2-b,hh=h/2-b,sh=new T.Shape();sh.moveTo(-hw,-hh);sh.lineTo(hw,-hh);sh.lineTo(hw,hh);sh.lineTo(-hw,hh);sh.closePath();
+ var g=new T.ExtrudeGeometry(sh,{depth:Math.max(.02,d-2*b),bevelEnabled:true,bevelThickness:b,bevelSize:b,bevelSegments:2,curveSegments:1});g.center();return gc[k]=g}
+var CY=function(a,b,h,n){return new T.CylinderGeometry(a,b,h,n||28)},SP=function(r){return new T.SphereGeometry(r,28,20)};
+var parts,gears,wires,halos,curG,SC={},act='robotics',cb=0;
+function begin(name,k,floor,tilt){curG=new T.Group();curG.rotation.x=tilt||0;curG.visible=(name==='robotics');G.add(curG);parts=[];gears=[];wires=[];halos=[];SC[name]={g:curG,parts:parts,gears:gears,wires:wires,halos:halos,k:k,floor:floor}}
+begin('robotics',1,-6.3,0);
+function add(g,m,x,y,z,rx,ry,rz){var o=new T.Mesh(g,m),u=o.userData;u.tp=new T.Vector3(x,y,z);u.tr=new T.Euler(rx||0,ry||0,rz||0);
+ var sx=small?4:9;
+ u.sp=new T.Vector3((Math.random()-.5)*2*sx,(Math.random()-.5)*11,(Math.random()-.5)*5+1);u.sr=new T.Euler(Math.random()*6,Math.random()*6,Math.random()*6);u.d=Math.random()*.55;curG.add(o);parts.push(o);return o}
+function pair(f){f(1);f(-1)}
+/* torso */
+add(plate(2.9,2,1.5),MP,0,1.15,0);add(plate(1.7,.4,1.1),MS,0,-.2,0);add(plate(1.6,.4,1),MP,0,-.65,0);add(plate(1.5,.4,.95),MS,0,-1.1,0);add(plate(2.3,.8,1.4),MP,0,-1.85,0);add(plate(1.2,.5,.3),MD,0,-1.85,.7);
+add(plate(2.3,1.3,.5),MS,0,1.6,-.7);add(CY(.55,.55,.14,32),MD,0,1.3,.74,Math.PI/2,0,0);
+var core=add(new T.TorusGeometry(.4,.07,14,44),MG,0,1.3,.82),disc=add(new T.CircleGeometry(.3,32),MG,0,1.3,.8);
+/* helmet */
+add(plate(1.5,1.7,1.5),MP,0,3.3,0);add(plate(1.15,1.2,.3),MS,0,3.25,.78);add(plate(.95,.4,.35),MP,0,2.62,.78);add(plate(.2,.5,1.2),MD,0,4.15,-.1);add(CY(.34,.4,.5),MD,0,2.35,0);
+pair(function(k){add(plate(.38,.1,.08),MG,k*.3,3.34,.95)});
+/* shoulders, arms, hands */
+pair(function(k){add(SP(.72),MP,k*2.05,1.75,0);add(new T.TorusGeometry(.74,.05,10,36),MS,k*2.05,1.75,0,Math.PI/2,0,0);add(plate(.95,.5,1.15),MS,k*2.15,2.35,0,0,0,-k*.25);
+ add(CY(.38,.34,1.6),MD,k*2.3,.4,0);add(plate(.85,1.2,.85),MP,k*2.3,.45,0);add(plate(.9,.14,.9),MS,k*2.3,.05,0);add(SP(.36),MD,k*2.3,-.5,0);
+ add(plate(.9,1.5,.9),MP,k*2.35,-1.5,.05);add(plate(.95,.14,.95),MS,k*2.35,-1,.05);add(plate(.95,.14,.95),MS,k*2.35,-2,.05);add(plate(.75,.7,.55),MD,k*2.4,-2.65,.12);add(new T.CircleGeometry(.2,24),MG,k*2.4,-2.68,.42);
+ [-.22,0,.22].forEach(function(f){add(plate(.14,.45,.16),MP,k*2.4+f,-3.1,.15)});
+/* legs */
+ add(SP(.42),MD,k*.78,-2.3,0);add(plate(1,1.8,1),MP,k*.8,-3.2,0);add(plate(1.05,.14,1.05),MS,k*.8,-2.7,0);add(SP(.38),MD,k*.8,-4.2,0);add(plate(.7,.5,.5),MS,k*.8,-4.2,.45);
+ add(plate(.95,1.5,.95),MP,k*.8,-5.05,0);add(plate(1,.14,1),MS,k*.8,-4.6,0);add(plate(1.15,.5,1.8),MS,k*.8,-5.95,.3);add(plate(.9,.3,.8),MP,k*.8,-5.65,.2)});
+/* tools in the hands + gears at the joints */
+add(plate(.14,1.5,.14),MS,2.95,-2.4,.55,.3,0,-.25);add(new T.TorusGeometry(.26,.08,8,16,5),MS,3.08,-1.65,.55,0,0,.4);
+add(CY(.07,.07,1.3,10),MG,-2.95,-2.4,.55,.3,0,.25);add(CY(.14,.14,.6,12),MD,-2.99,-2.95,.55,.3,0,.25);
+function gear(x,y,z,r){var o=add(CY(r,r,.16,12),MS,x,y,z,Math.PI/2,0,0);gears.push(o);add(CY(r*.35,r*.35,.2,10),MD,x,y,z,Math.PI/2,0,0)}
+gear(-2.05,1.75,.75,.34);gear(2.05,1.75,.75,.34);gear(-.78,-2.3,.45,.3);gear(.78,-2.3,.45,.3);gear(0,-.65,.62,.3);
+/* bolts and chips */
+var nb=small?24:56;for(var i=0;i<nb;i++){var f=i%3,bx=f==0?(Math.random()-.5)*2.4:(f==1?(i%2?.8:-.8)+(Math.random()-.5)*.7:(i%2?.8:-.8)+(Math.random()-.5)*.6),by=f==0?.5+Math.random()*1.3:(f==1?-3.2+(Math.random()-.5)*1.4:-5+(Math.random()-.5)*1.1),bz=f==0?.78:.56;
+ if(i%4==0)add(plate(.3,.3,.06),i%8?MG:MD,bx,by,bz);else add(CY(.07,.07,.08,6),MS,bx,by,bz,Math.PI/2,0,0)}
+/* glowing wires that draw themselves from the core */
+var MW=MG;function wire(pts,r){var c=new T.CatmullRomCurve3(pts.map(function(q){return new T.Vector3(q[0],q[1],q[2])})),g=new T.TubeGeometry(c,56,r||.04,6,false);g.userData={n:g.index.count};g.setDrawRange(0,0);var m=new T.Mesh(g,MW);curG.add(m);wires.push(g)}
+wire([[0,1.3,.95],[.5,2,.9],[.4,2.6,.85],[.3,3.2,.95]]);wire([[0,1.3,.95],[-.5,2,.9],[-.4,2.6,.85],[-.3,3.2,.95]]);
+wire([[.3,1.2,.95],[1.4,1.6,1.05],[2.1,1.1,.9],[2.4,-.4,.7],[2.4,-2.6,.55]]);wire([[-.3,1.2,.95],[-1.4,1.6,1.05],[-2.1,1.1,.9],[-2.4,-.4,.7],[-2.4,-2.6,.55]]);
+wire([[0,1,.95],[0,-.2,1],[.5,-1.6,.95],[.8,-3,.7],[.8,-4.4,.65],[.8,-5.6,.9]]);wire([[0,1,.95],[0,-.2,1],[-.5,-1.6,.95],[-.8,-3,.7],[-.8,-4.4,.65],[-.8,-5.6,.9]]);
+wire([[-.6,1.8,-.8],[-1.6,2.6,-.4],[-2.2,1.9,.9]],.03);wire([[.6,1.8,-.8],[1.6,2.6,-.4],[2.2,1.9,.9]],.03);
+/* glow halos, floor rings, drifting sparks */
+var hc=document.createElement('canvas');hc.width=hc.height=128;var hx=hc.getContext('2d'),hg=hx.createRadialGradient(64,64,0,64,64,64);hg.addColorStop(0,'rgba(255,255,255,1)');hg.addColorStop(.25,'rgba(255,255,255,.5)');hg.addColorStop(1,'rgba(255,255,255,0)');hx.fillStyle=hg;hx.fillRect(0,0,128,128);var ht=new T.CanvasTexture(hc);
+function halo(x,y,z,s){var m=new T.SpriteMaterial({map:ht,color:th[0].g,blending:T.AdditiveBlending,transparent:true,depthWrite:false,opacity:0}),o=new T.Sprite(m);o.position.set(x,y,z);o.userData.s=s;curG.add(o);halos.push(o)}
+halo(0,1.3,1.1,3.4);halo(-.3,3.34,1.1,1.1);halo(.3,3.34,1.1,1.1);halo(2.4,-2.68,.7,1.3);halo(-2.4,-2.68,.7,1.3);
+var MGl=new T.MeshStandardMaterial({color:0xffffff,metalness:.3,roughness:.08,transparent:true,opacity:.32,envMapIntensity:1.6});
+function starGeo(R,r){var sh=new T.Shape();for(var i=0;i<10;i++){var rr=i%2?r:R,an=Math.PI/2+i*Math.PI/5,x=Math.cos(an)*rr,y=Math.sin(an)*rr;if(i)sh.lineTo(x,y);else sh.moveTo(x,y)}sh.closePath();var g=new T.ExtrudeGeometry(sh,{depth:.25,bevelEnabled:true,bevelThickness:.08,bevelSize:.08,bevelSegments:2});g.center();return g}
+/* ===== Embedded: a dev board with MCU, pins, LEDs, USB ===== */
+begin('embedded',1.45,-3.7,0);
+add(plate(8,5.4,.35),MP,0,0,0);
+add(plate(2.3,2.3,.4),MD,0,.1,.35);add(plate(1.3,.22,.06),MG,0,.1,.58);
+for(var i=0;i<6;i++){var o=-.85+i*.34;add(plate(.4,.12,.08),MS,-1.35,.1+o,.35);add(plate(.4,.12,.08),MS,1.35,.1+o,.35);add(plate(.12,.4,.08),MS,o,1.45,.35);add(plate(.12,.4,.08),MS,o,-1.25,.35)}
+add(plate(1.5,1.1,.8),MS,-3.55,1.35,.4);add(plate(.9,.4,.3),MS,-2.1,-1.7,.3);
+add(plate(6.6,.3,.3),MD,0,2.4,.28);add(plate(6.6,.3,.3),MD,0,-2.4,.28);
+for(var i=0;i<8;i++){add(CY(.07,.07,.55,6),MS,-2.8+i*.8,2.4,.5,Math.PI/2,0,0);add(CY(.07,.07,.55,6),MS,-2.8+i*.8,-2.4,.5,Math.PI/2,0,0)}
+for(var i=0;i<3;i++)add(SP(.15),MG,2.9,1.5-i*.5,.3);
+for(var i=0;i<3;i++)add(CY(.18,.18,.5,16),MS,1.4+i*.5,-1.5,.45,Math.PI/2,0,0);
+[[-1,-1],[1,-1],[-1,1],[1,1]].forEach(function(c){add(new T.TorusGeometry(.2,.06,8,16),MD,c[0]*3.6,c[1]*2.3,.2)});
+wire([[-1.2,.1,.6],[-2.4,.9,.5],[-2.8,2.1,.5]]);wire([[1.2,.1,.6],[2.3,.8,.5],[2.9,1.5,.4]]);wire([[0,-1.2,.6],[0,-1.9,.5],[-.6,-2.3,.5]]);wire([[-1.2,-.3,.6],[-2.1,-1.1,.45],[-2.1,-1.7,.45]]);
+halo(0,.1,.9,3.2);halo(2.9,1,.5,1.2);
+/* ===== VLSI: layered die stack with glowing circuitry ===== */
+begin('vlsi',1.5,-2.8,.62);
+add(plate(7.4,.3,7.4),MD,0,-1.3,0);add(plate(6.4,.3,6.4),MP,0,-.8,0);add(plate(5.4,.3,5.4),MS,0,-.3,0);add(plate(4.4,.3,4.4),MP,0,.2,0);add(plate(3.4,.36,3.4),MD,0,.72,0);
+for(var gx=0;gx<4;gx++)for(var gz=0;gz<4;gz++)add(plate(.55,.06,.55),(gx+gz)%2?MG:MS,-1.05+gx*.7,1,-1.05+gz*.7);
+for(var i=0;i<9;i++){var q=-3+i*.75;add(plate(.22,.22,.6),MS,q,-1.3,3.85);add(plate(.22,.22,.6),MS,q,-1.3,-3.85);add(plate(.6,.22,.22),MS,3.85,-1.3,q);add(plate(.6,.22,.22),MS,-3.85,-1.3,q)}
+wire([[-1.7,1.05,0],[-3,1.05,0],[-3.4,.4,.8]]);wire([[1.7,1.05,0],[3,1.05,0],[3.4,.4,-.8]]);wire([[0,1.05,1.7],[0,1.05,3],[.6,.4,3.4]]);wire([[0,1.05,-1.7],[0,1.05,-3],[-.6,.4,-3.4]]);
+halo(0,1.2,0,3.6);halo(0,-.2,3.4,1.4);
+/* ===== Orders: a parcel that closes, with a confirmation tick ===== */
+begin('orders',1.6,-2.1,.12);
+add(plate(4,.2,3),MP,0,-1.5,0);add(plate(4,3,.2),MP,0,0,1.5);add(plate(4,3,.2),MP,0,0,-1.5);add(plate(3,3,.2),MP,-2,0,0,0,Math.PI/2,0);add(plate(3,3,.2),MP,2,0,0,0,Math.PI/2,0);
+add(plate(4,1.5,.15),MS,0,2,-1.9,-.8,0,0);add(plate(4,1.5,.15),MS,0,2,1.9,.8,0,0);
+add(plate(.6,3,.06),MS,0,0,1.62);add(plate(1.5,.9,.06),MD,1.1,-.6,1.62);add(plate(1.1,.1,.06),MG,1.1,-.45,1.67);add(plate(.8,.1,.06),MG,.95,-.75,1.67);
+wire([[-1.2,.5,1.8],[-.5,-.4,1.8],[1.2,1.2,1.8]],.09);
+halo(0,0,1.8,3);
+/* ===== Reviews: five stars and a speech bubble ===== */
+begin('reviews',1.05,-3,0);
+for(var i=0;i<5;i++)add(starGeo(.85,.37),MS,-3.4+i*1.7,.9,0,0,0,i%2?.08:-.08);
+add(plate(6.4,1.7,.4),MP,0,-1.4,0);add(plate(.9,.9,.4),MP,-1.8,-2.5,0,0,0,Math.PI/4);
+add(plate(4.6,.16,.1),MG,0,-1.05,.28);add(plate(3.4,.16,.1),MD,-.6,-1.45,.28);add(plate(4,.16,.1),MD,-.3,-1.85,.28);
+wire([[-4.3,-.3,.3],[0,-.5,.3],[4.3,-.3,.3]],.05);
+halo(0,.9,.6,3.6);halo(-3.4,.9,.5,1.3);halo(3.4,.9,.5,1.3);
+/* ===== Coupons: a ticket with a percent mark ===== */
+begin('coupons',1.15,-2.5,0);curG.rotation.z=.14;
+add(plate(7,3.4,.4),MP,0,0,0);add(CY(.5,.5,.46,24),MD,-3.5,0,0,Math.PI/2,0,0);add(CY(.5,.5,.46,24),MD,3.5,0,0,Math.PI/2,0,0);
+for(var i=0;i<8;i++)add(plate(.1,.28,.08),MS,1.7,-1.3+i*.37,.25);
+add(new T.TorusGeometry(.38,.1,10,24),MS,-2.3,.8,.3);add(new T.TorusGeometry(.38,.1,10,24),MS,-.9,-.8,.3);add(plate(.24,2.8,.16),MG,-1.6,0,.3,0,0,-.6);
+add(plate(1.5,.3,.08),MG,2.9,.7,.28);add(plate(1.5,.3,.08),MD,2.9,0,.28);add(plate(1.5,.3,.08),MD,2.9,-.7,.28);
+wire([[-3.1,1.4,.3],[0,1.55,.3],[3.1,1.4,.3],[3.15,-1.4,.3],[0,-1.55,.3],[-3.1,-1.4,.3],[-3.1,1.4,.3]],.05);
+halo(-1.6,0,.6,3.2);
+/* ===== Request a project: an idea bulb with rays ===== */
+begin('request',1.3,-3.2,0);
+add(SP(1.65),MGl,0,1,0);add(CY(.95,.62,.9,24),MS,0,-.8,0);for(var i=0;i<3;i++)add(CY(.64,.64,.2,24),MS,0,-1.35-i*.28,0);add(CY(.3,.12,.28,16),MD,0,-2.25,0);
+add(SP(.4),MG,0,.9,0);
+for(var i=0;i<10;i++){var an=-Math.PI*.15+i*Math.PI*1.3/9,rr=2.8;add(plate(.16,.7,.1),MS,Math.cos(an)*rr,1+Math.sin(an)*rr,0,0,0,an-Math.PI/2)}
+wire([[-.55,-.3,0],[-.4,.9,0],[-.15,.3,0],[.15,.9,0],[.4,.3,0],[.55,-.3,0]],.06);
+halo(0,1,0,5);
+/* ===== Admin: spinning gears and a live chart panel ===== */
+begin('admin',1.25,-2.6,0);
+var ag=add(CY(1.7,1.7,.45,12),MP,-2.2,.4,0,Math.PI/2,0,0);gears.push(ag);add(CY(.55,.55,.55,16),MD,-2.2,.4,0,Math.PI/2,0,0);
+var ag2=add(CY(.95,.95,.4,10),MS,-.2,-1.5,.1,Math.PI/2,0,0);gears.push(ag2);add(CY(.3,.3,.5,12),MD,-.2,-1.5,.1,Math.PI/2,0,0);
+add(plate(4.6,4,.3),MD,2.6,.2,-.2);
+[1,1.7,2.3,3].forEach(function(h,i){add(plate(.6,h,.3),i%2?MS:MP,1.3+i*.85,-1.5+h/2,.05)});
+wire([[1,-.3,.4],[1.9,.5,.4],[2.8,0,.4],[3.9,1.7,.4]],.06);
+halo(-2.2,.4,.5,3);halo(3.9,1.7,.5,1.2);
+/* ===== Purchase equipment: a cart filling with components ===== */
+begin('equipment',1.3,-2.9,.1);
+add(plate(4.4,.2,2.6),MP,0,-1.2,0);add(plate(4.4,2,.2),MP,0,-.2,-1.3);add(plate(.2,2,2.6),MP,-2.2,-.2,0);add(plate(.2,2,2.6),MP,2.2,-.2,0);add(plate(4.4,.5,.2),MS,0,-.6,1.3);
+add(plate(.25,1.6,.25),MS,-2.5,1.1,-1.3,0,0,.5);add(plate(1.6,.22,.25),MS,-3.1,1.9,-1.3);
+add(CY(.45,.45,.3,20),MD,-1.5,-1.8,1,Math.PI/2,0,0);add(CY(.45,.45,.3,20),MD,1.5,-1.8,1,Math.PI/2,0,0);add(CY(.45,.45,.3,20),MD,-1.5,-1.8,-1,Math.PI/2,0,0);add(CY(.45,.45,.3,20),MD,1.5,-1.8,-1,Math.PI/2,0,0);
+add(plate(1.4,1.4,.35),MD,-1,.2,-.4);for(var i=0;i<4;i++){add(plate(.3,.1,.08),MS,-1.8,-.2+i*.25,-.4);add(plate(.3,.1,.08),MS,-.2,-.2+i*.25,-.4)}
+add(CY(.5,.5,1.1,20),MS,1,.1,-.3);add(CY(.12,.12,.8,10),MD,1,.9,-.3);
+add(plate(1.5,1,.3),MG,.2,.5,.6,0,0,.2);add(SP(.22),MG,1.5,.1,.6);add(SP(.22),MP,-1.4,.1,.7);
+wire([[-1.3,2.4,1.2],[-.3,1.6,1.2],[0,.9,1.2]],.07);
+halo(0,.4,.8,3.8);
+act='robotics';
+var base=new T.Group();base.position.set(0,-6.3,.2);G.add(base);var MB=new T.MeshBasicMaterial({color:th[0].g,transparent:true,opacity:0,side:T.DoubleSide,depthWrite:false});
+[1.9,2.6,3.4].forEach(function(r,i){var m=new T.Mesh(new T.TorusGeometry(r,.03,6,72),MB);m.rotation.x=Math.PI/2;base.add(m)});
+var np=small?120:300,pa=new Float32Array(np*3);for(var j=0;j<np;j++){pa[j*3]=(Math.random()-.5)*14;pa[j*3+1]=(Math.random()-.5)*12;pa[j*3+2]=(Math.random()-.5)*8}
+var pgm=new T.BufferGeometry();pgm.setAttribute('position',new T.BufferAttribute(pa,3));var MPt=new T.PointsMaterial({size:.07,color:th[0].g,transparent:true,opacity:.55,depthWrite:false,blending:T.AdditiveBlending});G.add(new T.Points(pgm,MPt));
+function ease(x){return 1-Math.pow(1-x,3)}
+var base2=1,mx=0,my=0,fit=1,wide=true,intro=introOn,ik=introOn?0:1,toff=0,lt=0,introEnd=11.5;function endIntro(){if(!intro)return;intro=false;clearIntro();layout()}
+function layout(){var w=innerWidth,h=innerHeight;wide=w>900;R.setSize(w,h,false);C.aspect=w/h;C.updateProjectionMatrix();fit=wide?.88:.72;base2=wide?1:.55;cv.style.opacity=intro?1:Math.max(.18,1-scrollY/800)*base2}
+addEventListener('resize',function(){layout();if(reduce)R.render(S,C)});layout();
+addEventListener('pointermove',function(e){mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});
+addEventListener('scroll',function(){if(!intro)cv.style.opacity=Math.max(.18,1-scrollY/800)*base2},{passive:true});
+var clk=new T.Clock(),cA=new T.Color(),cB=new T.Color();
+function tint(m,k,i0,i1,ke){cA.setHex(th[i0][k]);cB.setHex(th[i1][k]);m.color.copy(cA).lerp(cB,ke)}
+function draw(a,t,ke,i0,i1,pulse){
+ tint(MP,'p',i0,i1,ke);tint(MS,'s',i0,i1,ke);tint(MG,'g',i0,i1,ke);MB.color.copy(MG.color);MPt.color.copy(MG.color);coreL.color.copy(MG.color);
+ var A=SC[act];parts=A.parts;gears=A.gears;wires=A.wires;halos=A.halos;
+ parts.forEach(function(o){var u=o.userData,q=ease(Math.min(1,Math.max(0,(a-u.d)/.45)));o.position.lerpVectors(u.sp,u.tp,q);o.position.y+=Math.sin(t*1.6+u.d*9)*.3*(1-q);
+  var wb=(1-q)*Math.sin(t*.9+u.d*8)*1.2;o.rotation.set(u.sr.x+(u.tr.x-u.sr.x)*q+wb,u.sr.y+(u.tr.y-u.sr.y)*q+wb*.8,u.sr.z+(u.tr.z-u.sr.z)*q);o.scale.setScalar(.7+.3*q)});
+ gears.forEach(function(o){if(a>=.99)o.rotateY(.02)});
+ wires.forEach(function(g,i){var q=Math.min(1,Math.max(0,(a-.55-i*.035)/.4));g.setDrawRange(0,Math.floor(g.userData.n*q/3)*3)});
+ var vis=Math.min(1,Math.max(0,(a-.8)/.2));halos.forEach(function(h,i){h.material.color.copy(MG.color);h.material.opacity=vis*(.55+.3*Math.sin(t*3+i));h.scale.setScalar(h.userData.s*(1+.7*pulse*(i?0:1)))});
+ MB.opacity=vis*.45;base.rotation.y=t*.4;coreL.intensity=vis*(2+.5*Math.sin(t*3)+2.5*pulse);
+ var pp=pgm.attributes.position.array;for(var j=0;j<np;j++){pp[j*3+1]+=.004;if(pp[j*3+1]>6)pp[j*3+1]=-6}pgm.attributes.position.needsUpdate=true;
+ var e=ik*ik*(3-2*ik),i0s=wide?.88:.7,s=i0s+(fit-i0s)*e;G.scale.setScalar(s*A.k);base.position.y=A.floor;G.position.set(0,-.25*s+(a>=1?Math.sin(t*1.2)*.10:0),0);G.rotation.y=Math.sin(t*.35)*.3+mx*.5;G.rotation.x=my*.12}
+function frame(){if(document.hidden){requestAnimationFrame(frame);return}var t=clk.getElapsedTime()+toff;if(intro&&t>=introEnd)endIntro();if(!intro&&ik<1)ik=Math.min(1,ik+(t-lt)/1.6);lt=t;var c=t%18,cyc=Math.floor(t/18),a=c<9?c/9:c<14?1:Math.max(0,1-(c-14)/4),
+ i0=(cyc+cb)%th.length,i1=(i0+1)%th.length,k=c<9?0:c<10.6?(c-9)/1.6:1,ke=k*k*(3-2*k),pulse=k>0&&k<1?Math.sin(k*Math.PI):0;
+ if(intro)uiIntro(a);draw(a,t,ke,i0,i1,pulse);R.render(S,C);requestAnimationFrame(frame)}
+skipFn=function(){toff=Math.max(toff,9-clk.getElapsedTime());endIntro()};
+window.kbSetScene=function(n){if(!SC[n]||intro)return;act=n;for(var k in SC)SC[k].g.visible=(k===n);cb++;toff=-clk.getElapsedTime();lt=0;if(reduce){draw(1,0,0,0,0,0);R.render(S,C)}};
+if(reduce){draw(1,0,0,0,0,0);R.render(S,C)}else requestAnimationFrame(frame);
+}})();
+
+</script>
+<script>
+/* Home icon rails: each icon plays its own animation. Hidden once you scroll past the home screen. */
+(function(){
+var btns=document.querySelectorAll('[data-scene]'),nameEl=document.getElementById('kbSceneName'),rails=[document.getElementById('kbRailL'),document.getElementById('kbRailR'),nameEl];
+btns.forEach(function(b){b.addEventListener('click',function(){
+ btns.forEach(function(x){x.setAttribute('aria-pressed',String(x===b))});
+ if(nameEl)nameEl.textContent=b.getAttribute('data-label');
+ if(window.kbSetScene)window.kbSetScene(b.getAttribute('data-scene'));
+ showPanel(b.getAttribute('data-scene'),b);
+})});
+var P=document.getElementById('kbPanel'),CAT={robotics:'Robotics',embedded:'Embedded',vlsi:'VLSI / FPGA'};
+var TL={orders:['My orders','See your verified purchases and payment IDs.','View my orders','orders'],reviews:['Reviews','Rate a kit and read what other students wrote.','Write a review','reviews'],coupons:['Coupons','Sample student codes: STUDENT10 (10%) and KITBENCH15 (15%).','Explore coupons','coupons'],request:['Request a project','Can’t find your project? Tell us what to build.','Request a project','project-request'],admin:['Admin','Project, order and request overview (browser-only demo).','Open dashboard','admin']};
+var EQ={'Controller boards':['Arduino UNO R3','ESP32 DevKit','STM32 Nucleo','Raspberry Pi 4','ESP32-CAM'],'FPGA boards':['Basys 3 (Artix-7)','Nexys A7','Tang Nano 9K','iCEBreaker'],'Motors & drivers':['BO geared motor','Servo SG90','Stepper NEMA17','L298N driver','BLDC motor + ESC'],'Sensors':['IR sensor','Ultrasonic HC-SR04','MPU6050 IMU','DHT11','Camera module'],'Power & wiring':['LiPo battery','18650 cell + holder','Breadboard','Jumper wire set'],'Tools':['Soldering iron','Digital multimeter','Logic analyzer','Hot glue gun']};
+function eqForm(){
+ var orders=kbRead('kb-equipment-orders',[]);
+ kbOpen('<h2>Purchase order: equipment</h2><p class="muted-note">Pick the equipment you need to buy. Orders are saved in this browser only; this demo does not send them to a supplier or take payment.</p><form id="kbEqForm"><label>Equipment<select name="item">'+Object.keys(EQ).map(function(g){return '<optgroup label="'+kbEsc(g)+'">'+EQ[g].map(function(i){return '<option>'+kbEsc(i)+'</option>'}).join('')+'</optgroup>'}).join('')+'</select></label><div class="admin-grid"><label>Quantity<input name="qty" type="number" min="1" max="500" value="1" required></label><label>Phone (optional)<input name="phone" type="tel" maxlength="20"></label></div><label>Notes (model, specs, deadline)<textarea name="notes" rows="2" maxlength="300"></textarea></label><button class="tool-action" type="submit">Save purchase order</button></form><h3>Saved purchase orders</h3>'+(orders.length?'<div class="feature-list">'+orders.map(function(o){return '<div class="feature-row"><b>'+kbEsc(o.item)+' × '+kbEsc(o.qty)+'</b><p>'+kbEsc(o.notes||'No notes')+'</p><span class="muted-note">'+kbEsc(o.date)+' · '+kbEsc(o.status)+'</span></div>'}).join('')+'</div>':'<p class="muted-note">No purchase orders yet.</p>'));
+ document.getElementById('kbEqForm').onsubmit=function(e){e.preventDefault();var f=new FormData(e.target);orders.unshift({item:String(f.get('item')),qty:Number(f.get('qty')),notes:String(f.get('notes')||'').trim(),phone:String(f.get('phone')||'').trim(),date:new Date().toLocaleDateString(),status:'Saved in this browser only'});kbWrite('kb-equipment-orders',orders.slice(0,50));eqForm()};
+}
+function showPanel(sc,btn){
+ var h='',side='L',a=btn.style.getPropertyValue('--a'),c=btn.style.getPropertyValue('--b');
+ if(CAT[sc]){var list=K.filter(function(k){return k.d===sc});
+  h='<h3>'+kbEsc(CAT[sc])+' kits</h3><p>'+list.length+' projects, from mini to final year.</p><div class="kbp-h">Pick a level</div><div class="kbp-chips">'+LV.map(function(l){return '<button data-pa="browse" data-pd="'+sc+'" data-pl="'+kbEsc(l)+'"><span>'+kbEsc(l)+'</span><small>'+list.filter(function(k){return k.lv===l}).length+'</small></button>'}).join('')+'</div><div class="kbp-h">Popular picks</div><div class="kbp-list">'+list.slice(0,4).map(function(k){return '<button data-pa="kit" data-pv="'+k.id+'"><span>'+kbEsc(k.t)+'</span><small>'+inr(k.p)+'</small></button>'}).join('')+'</div><button class="kbp-go" data-pa="browse" data-pd="'+sc+'" data-pl="all">Browse all '+kbEsc(CAT[sc])+' kits</button>';
+ }else if(sc==='equipment'){side='R';
+  h='<h3>Purchase equipment</h3><p>Boards, motors, sensors, power and tools for your build.</p><div class="kbp-list">'+Object.keys(EQ).map(function(g){return '<button data-pa="eq"><span>'+kbEsc(g)+'</span><small>'+EQ[g].length+' items</small></button>'}).join('')+'</div><button class="kbp-go" data-pa="eq">Create purchase order</button>';
+ }else if(TL[sc]){side='R';var t=TL[sc];
+  h='<h3>'+kbEsc(t[0])+'</h3><p>'+kbEsc(t[1])+'</p><button class="kbp-go" data-pa="tool" data-pt="'+t[3]+'">'+kbEsc(t[2])+'</button>';
+ }
+ if(sc==='orders'||sc==='reviews'||sc==='coupons'||sc==='request'||sc==='admin')side='R';else if(!CAT[sc])side='R';else side='L';
+ P.className='kb-panel '+side;P.style.setProperty('--pa',a);P.style.setProperty('--pc',c);
+ P.innerHTML='<button class="kbp-x" data-pa="x" aria-label="Close options">✕</button>'+h+'<button class="kbp-cancel" type="button" data-pa="x">Cancel</button>';P.hidden=false;
+}
+P.addEventListener('click',function(e){var b=e.target.closest('button');if(!b||!b.dataset.pa)return;var d=b.dataset;
+ if(d.pa==='x'){P.hidden=true;document.querySelectorAll('[data-scene]').forEach(function(x){x.setAttribute('aria-pressed','false')});if(nameEl)nameEl.textContent='';}
+ else if(d.pa==='browse'){st.d=d.pd;st.lv=d.pl;st.n=12;st.q='';st.savedOnly=false;$('q').value='';tabs();grid();document.getElementById('tabs').scrollIntoView({behavior:'smooth'})}
+ else if(d.pa==='kit'){show(d.pv)}
+ else if(d.pa==='eq'){eqForm()}
+ else if(d.pa==='tool'){kbTool(d.pt)}
+});
+rails.push(P);
+function away(){var a=scrollY>innerHeight*.55;rails.forEach(function(r){if(r)r.classList.toggle('away',a)})}
+addEventListener('scroll',away,{passive:true});away();
+})();
+</script>
+
+<style id="kbTrafficAnimeStyle">
+/* Live anime-style output preview for the Traffic Light Controller kit */
+.project-scene.kb-traffic-scene{height:160px;position:relative;overflow:hidden;background:linear-gradient(150deg,#07152e,#102b45 58%,#0b1830)!important;border-radius:14px}
+.kb-traffic-scene .traffic-stage{position:absolute;inset:0;overflow:hidden}
+.kb-traffic-scene .traffic-stage:before{content:"";position:absolute;width:125%;height:48px;left:-12%;top:64px;background:#263449;transform:rotate(-18deg);border-top:2px solid #64748b;border-bottom:2px solid #64748b;box-shadow:0 0 0 3px #111827}
+.kb-traffic-scene .traffic-stage:after{content:"";position:absolute;width:120%;height:2px;left:-10%;top:86px;background:repeating-linear-gradient(90deg,#f8fafc 0 13px,transparent 13px 25px);transform:rotate(-18deg);opacity:.8}
+.kb-traffic-scene .traffic-title{position:absolute;left:10px;top:8px;color:#e0f2fe;font-size:10px;font-weight:900;letter-spacing:1.3px;text-shadow:0 0 12px #38bdf8}
+.kb-traffic-scene .traffic-signal{position:absolute;z-index:3;width:23px;padding:5px 4px;border-radius:8px;background:linear-gradient(135deg,#374151,#020617);border:1px solid #94a3b8;box-shadow:0 5px 12px #0008}
+.kb-traffic-scene .traffic-signal.one{left:25%;top:28px}.kb-traffic-scene .traffic-signal.two{right:22%;top:82px;transform:scale(.85)}
+.kb-traffic-scene .traffic-light{display:block;width:13px;height:13px;margin:2px auto;border-radius:50%;background:#172033;box-shadow:inset 0 0 4px #000}
+.kb-traffic-scene .traffic-light.red{background:#ff334f;box-shadow:0 0 8px #ff334f,0 0 16px #ff334f88;animation:kbTrafficRed 9s infinite}
+.kb-traffic-scene .traffic-light.yellow{background:#facc15;box-shadow:0 0 8px #facc15;animation:kbTrafficYellow 9s infinite}
+.kb-traffic-scene .traffic-light.green{background:#22f7a1;box-shadow:0 0 8px #22f7a1,0 0 16px #22f7a188;animation:kbTrafficGreen 9s infinite}
+@keyframes kbTrafficRed{0%,33%{opacity:1}34%,100%{opacity:.28}}
+@keyframes kbTrafficYellow{0%,33%,67%,100%{opacity:.25}34%,42%{opacity:1}43%,66%{opacity:.25}}
+@keyframes kbTrafficGreen{0%,42%,100%{opacity:.25}43%,66%{opacity:1}67%,99%{opacity:.25}}
+.kb-traffic-scene .traffic-car{position:absolute;z-index:2;width:21px;height:10px;border-radius:4px 6px 3px 3px;background:linear-gradient(90deg,#60a5fa,#22d3ee);box-shadow:0 0 10px #38bdf8;top:90px;left:-28px;transform:rotate(-18deg);animation:kbCarDrive 5s linear infinite}
+.kb-traffic-scene .traffic-car:before{content:"";position:absolute;left:5px;top:-4px;width:10px;height:5px;border-radius:4px 4px 0 0;background:#bae6fd}
+.kb-traffic-scene .traffic-car.car2{top:49px;left:auto;right:-28px;background:linear-gradient(90deg,#fb7185,#f97316);animation:kbCarDrive2 6s linear infinite}
+.kb-traffic-scene .traffic-car.car2:before{background:#fecdd3}
+.kb-traffic-scene .traffic-status{position:absolute;z-index:4;right:9px;top:9px;font-size:9px;font-weight:800;color:#86efac;background:#052e26d9;border:1px solid #34d39980;padding:4px 7px;border-radius:20px}
+.kb-traffic-scene .scene-caption{z-index:5;bottom:7px;left:9px;font-size:9px;letter-spacing:.8px;color:#dbeafe;text-shadow:0 1px 5px #000}
+@keyframes kbCarDrive{0%{left:-28px}100%{left:110%}}
+@keyframes kbCarDrive2{0%{right:-28px}100%{right:110%}}
+@media(prefers-reduced-motion:reduce){.kb-traffic-scene .traffic-light,.kb-traffic-scene .traffic-car{animation:none!important}}
+</style>
+<script id="kbTrafficAnimeScript">
+(function(){
+  function makeTrafficPreview(scene){
+    if(!scene||scene.dataset.trafficAnime==="1")return;
+    scene.dataset.trafficAnime="1";
+    scene.classList.add("kb-traffic-scene");
+    scene.innerHTML='<div class="traffic-stage" role="img" aria-label="Animated traffic light controller output: red, yellow and green signals cycle while cars move through a four-way junction"><span class="traffic-title">4-WAY JUNCTION · LIVE OUTPUT</span><span class="traffic-status">● AUTO CYCLE</span><div class="traffic-signal one"><i class="traffic-light red"></i><i class="traffic-light yellow"></i><i class="traffic-light green"></i></div><div class="traffic-signal two"><i class="traffic-light red"></i><i class="traffic-light yellow"></i><i class="traffic-light green"></i></div><span class="traffic-car"></span><span class="traffic-car car2"></span><span class="scene-caption">TRAFFIC LIGHT CONTROLLER</span></div>';
+  }
+  function scan(){
+    document.querySelectorAll('.card').forEach(function(card){
+      var title=card.querySelector('h3');
+      if(title&&/traffic light controller/i.test(title.textContent))makeTrafficPreview(card.querySelector('.project-scene'));
+    });
+  }
+  scan();
+  new MutationObserver(scan).observe(document.getElementById('grid')||document.body,{childList:true,subtree:true});
+})();
+</script>
+
+
+
+
+<style>
+/* Compact home header with a clearly visible robot head */
+.kb-maker-intro{display:grid!important;grid-template-columns:minmax(180px,.7fr) repeat(3,minmax(0,1fr));gap:10px;margin:8px 0 12px;padding:10px;border:1px solid #22d3ee55;border-radius:14px;min-height:0;background:linear-gradient(120deg,#06111f,#101c35 58%,#07111f);box-shadow:0 8px 24px #02061733;overflow:hidden}
+.kb-maker-intro .kb-intro-copy{padding:8px;min-width:0}
+.kb-maker-intro .kb-intro-copy h2{font-size:clamp(20px,2vw,30px);line-height:1.08;margin:4px 0 8px}
+.kb-maker-intro .kb-intro-copy p{margin:4px 0;font-size:13px}
+.kb-maker-intro .kb-assembly{display:none!important}
+.kb-maker-intro .kb-domain-panel{min-width:0;min-height:145px;padding:10px;border:1px solid #ffffff20;border-radius:10px;overflow:hidden}
+.kb-maker-intro .kb-domain-panel .domain-art{font-size:clamp(48px,5vw,76px)}
+.kb-maker-intro .kb-showcase-robot{display:block!important;left:5%;bottom:10px;transform:scale(1.12);transform-origin:bottom left}
+.kb-maker-intro .kb-robot-head{width:82px;height:68px;left:19px;top:20px;border:4px solid #e0f2fe;box-shadow:0 0 18px #22d3ee,inset 0 -7px 0 #334155}
+.kb-maker-intro .kb-robot-head span{top:20px;width:14px;height:15px}
+.kb-maker-intro .kb-robot-head span:first-child{left:15px}.kb-maker-intro .kb-robot-head span:nth-child(2){right:15px}
+.kb-maker-intro .kb-domain-showcase .kb-board{left:42%;right:1%;bottom:14px;height:85px}
+@media(max-width:900px){.kb-maker-intro{grid-template-columns:1fr 1fr}.kb-maker-intro .kb-intro-copy{grid-column:1/-1}.kb-maker-intro .kb-domain-panel{min-height:125px}}
+@media(max-width:560px){.kb-maker-intro{grid-template-columns:1fr;padding:8px}.kb-maker-intro .kb-domain-panel{min-height:115px}.kb-maker-intro .kb-showcase-robot{transform:scale(.82);left:1%}}
+
+.kb-category-stage{display:none;position:relative;isolation:isolate;overflow:hidden;min-height:245px;margin:18px 0 22px;padding:26px clamp(18px,4vw,44px);border-radius:24px;border:1px solid var(--stage-accent,#22d3ee);color:#f8fafc;background:radial-gradient(ellipse at 75% 40%,color-mix(in srgb,var(--stage-accent) 28%,transparent),transparent 45%),linear-gradient(120deg,#06111f,#101c35 58%,#07111f);box-shadow:0 18px 48px #02061755;align-items:center;grid-template-columns:1fr minmax(170px,.7fr);gap:20px}
+.kb-category-stage.active{display:grid;animation:kbStageIn .45s ease both}
+.kb-category-stage:before{content:"";position:absolute;inset:0;z-index:-1;background-image:linear-gradient(color-mix(in srgb,var(--stage-accent) 15%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--stage-accent) 15%,transparent) 1px,transparent 1px);background-size:27px 27px;mask-image:linear-gradient(90deg,transparent,#000)}
+.kb-category-stage .stage-kicker{font-size:11px;letter-spacing:.2em;font-weight:800;color:var(--stage-accent)}
+.kb-category-stage h2{margin:8px 0;font-size:clamp(26px,4vw,42px);line-height:1.08}
+.kb-category-stage p{max-width:560px;color:#cbd5e1;margin:0}
+.kb-stage-art{position:relative;display:grid;place-items:center;min-height:175px;font-size:clamp(80px,12vw,125px);filter:drop-shadow(0 0 24px color-mix(in srgb,var(--stage-accent) 65%,transparent));animation:kbArtFloat 3s ease-in-out infinite}
+.kb-stage-art:before{content:"";position:absolute;width:180px;height:64px;border:2px solid var(--stage-accent);border-radius:50%;transform:rotate(-18deg);box-shadow:0 0 22px color-mix(in srgb,var(--stage-accent) 40%,transparent),inset 0 0 18px color-mix(in srgb,var(--stage-accent) 20%,transparent)}
+.kb-stage-art:after{content:"";position:absolute;width:132px;height:132px;border:1px dashed color-mix(in srgb,var(--stage-accent) 80%,transparent);border-radius:28px;transform:rotate(35deg);animation:kbOrbit 12s linear infinite}
+.kb-category-stage[data-domain="robotics"]{--stage-accent:#22d3ee}
+.kb-category-stage[data-domain="embedded"]{--stage-accent:#34f5b5}
+.kb-category-stage[data-domain="vlsi"]{--stage-accent:#c084fc}
+@keyframes kbStageIn{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:none}}
+@keyframes kbArtFloat{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-9px) rotate(3deg)}}
+@keyframes kbOrbit{to{transform:rotate(395deg)}}
+@media(max-width:600px){.kb-category-stage{grid-template-columns:1fr;gap:4px}.kb-stage-art{min-height:135px}.kb-stage-art:before{width:150px}}
+@media(prefers-reduced-motion:reduce){.kb-category-stage.active,.kb-stage-art,.kb-stage-art:after{animation:none!important}}
+</style>
+<script>
+(function(){
+ const wrap=document.querySelector('.wrap');
+ const tabs=document.getElementById('tabs');
+ const hero=document.querySelector('.hero');
+ const grid=document.getElementById('grid');
+ if(!wrap||!tabs||!hero||!grid)return;
+ const stage=document.createElement('section');
+ stage.className='kb-category-stage';
+ stage.setAttribute('aria-live','polite');
+ stage.innerHTML='<div><span class="stage-kicker" id="kbStageKicker">CATEGORY EXPERIENCE</span><h2 id="kbStageTitle"></h2><p id="kbStageDesc"></p></div><div class="kb-stage-art" id="kbStageArt" aria-hidden="true"></div>';
+ grid.parentNode.insertBefore(stage,grid);
+ const domains={
+  robotics:{title:'Robotics Lab',kicker:'ROBOTICS • BUILD • MOVE',desc:'Explore moving machines, robot control, motors, sensors and autonomous project kits.',art:'🤖'},
+  embedded:{title:'Embedded Systems Lab',kicker:'EMBEDDED • SENSE • CONTROL',desc:'Explore microcontrollers, sensor interfaces, smart devices and real-time embedded projects.',art:'🔌'},
+  vlsi:{title:'VLSI Chip Design Lab',kicker:'VLSI • DESIGN • SIMULATE',desc:'Explore digital logic, chip architecture, semiconductor concepts and circuit design projects.',art:'💠'}
+ };
+ function showDomain(key){
+  const d=domains[key];
+  if(!d){stage.classList.remove('active');stage.style.display='none';return;}
+  stage.dataset.domain=key;
+  document.getElementById('kbStageKicker').textContent=d.kicker;
+  document.getElementById('kbStageTitle').textContent=d.title;
+  document.getElementById('kbStageDesc').textContent=d.desc;
+  document.getElementById('kbStageArt').textContent=d.art;
+  stage.style.display='';stage.classList.add('active');
+ }
+ tabs.addEventListener('click',function(e){
+  const b=e.target.closest('button'); if(!b)return;
+  const t=(b.textContent||'').toLowerCase();
+  if(t.includes('robot'))showDomain('robotics');
+  else if(t.includes('embedded'))showDomain('embedded');
+  else if(t.includes('vlsi')||t.includes('chip'))showDomain('vlsi');
+  else showDomain('');
+ });
+ // Keep backgrounds off Home until a category is selected; left rail opens its matching category scene.
+ document.querySelectorAll('#kbRailL [data-scene]').forEach(function(b){b.addEventListener('click',function(){showDomain(b.getAttribute('data-scene'));});});
+ showDomain('');
+})();
+</script>
+
+
+<style id="kb-cancel-and-compact-home">
+/* Clear cancel action for every side-icon panel */
+.kb-panel .kbp-cancel{display:block;width:100%;margin-top:12px;padding:10px 14px;border:1px solid var(--line);border-radius:11px;background:transparent;color:var(--ink);font:700 14px inherit;cursor:pointer}
+.kb-panel .kbp-cancel:hover{border-color:var(--a);background:color-mix(in srgb,var(--a) 10%,transparent)}
+/* Reduce unused space at the top of Home */
+.hero{padding:8px 0 4px!important;margin-top:0!important}
+.hero h1{font-size:clamp(27px,4.5vw,44px)!important;line-height:1.08!important;margin:0 0 7px!important}
+.hero p{font-size:14px!important;line-height:1.45!important;margin:5px 0 0!important;max-width:70ch}
+header{margin-bottom:0!important}
+@media(max-width:600px){.hero{padding:5px 0 3px!important}.hero h1{font-size:clamp(24px,7vw,34px)!important}.hero p{font-size:13px!important}}
+</style>
+
+
+<style id="kb-visible-robot-head-top">
+/* Make the robot head clearly visible in the top Home header */
+.header-left .logo{display:flex!important;align-items:center!important;gap:9px!important;position:relative}
+.kb-mini-robot-head{position:relative;display:inline-flex;flex:0 0 39px;width:39px;height:34px;align-items:center;justify-content:center;border:2px solid #a5f3fc;border-radius:11px 11px 9px 9px;background:linear-gradient(145deg,#e0f2fe 0%,#64748b 48%,#1e293b 100%);box-shadow:inset 0 -4px 0 #334155,0 0 13px #22d3ee99;transform:perspective(80px) rotateY(-8deg);animation:kbTopHeadFloat 2.8s ease-in-out infinite}
+.kb-mini-robot-head:before{content:"";position:absolute;width:13px;height:5px;top:-7px;left:11px;border-radius:5px 5px 0 0;background:#67e8f9}
+.kb-mini-robot-head:after{content:"";position:absolute;width:7px;height:7px;top:-12px;left:14px;border-radius:50%;background:#f0abfc;box-shadow:0 0 10px #f0abfc}
+.kb-mini-robot-head i,.kb-mini-robot-head b{position:absolute;top:11px;width:6px;height:8px;border-radius:4px;background:#22d3ee;box-shadow:0 0 8px #22d3ee}
+.kb-mini-robot-head i{left:7px}.kb-mini-robot-head b{right:7px}
+.kb-mini-robot-head em{position:absolute;bottom:6px;width:12px;height:3px;border-radius:4px;background:#0f172a}
+@keyframes kbTopHeadFloat{0%,100%{transform:perspective(80px) rotateY(-8deg) translateY(0)}50%{transform:perspective(80px) rotateY(8deg) translateY(-3px)}}
+@media(prefers-reduced-motion:reduce){.kb-mini-robot-head{animation:none}}
+@media(max-width:520px){.kb-mini-robot-head{flex-basis:32px;width:32px;height:29px;transform:scale(.9)}.header-left .logo{gap:6px!important}}
+
+/* Keep Profile, Theme, Saved and Cart together on the top header line */
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:nowrap;padding:10px 0!important}
+.header-left{flex:1 1 auto;min-width:0;gap:10px!important}
+.header-left .logo{font-size:20px!important}
+.head-actions{display:flex;align-items:center;gap:6px!important;flex-wrap:nowrap!important;white-space:nowrap}
+.utility-btn{padding:7px 9px!important;font-size:12px!important;white-space:nowrap}
+.profile-avatar-btn{padding:3px 8px 3px 3px!important;font-size:12px!important}
+.profile-avatar-img{width:29px!important;height:29px!important}
+.cartbtn{padding:8px 12px!important;white-space:nowrap}
+@media(max-width:850px){header{flex-wrap:wrap!important}.header-left{width:100%;justify-content:space-between}.head-actions{width:100%;justify-content:space-between;overflow-x:auto;padding-bottom:3px}.head-actions>*{flex-shrink:0}}
+</style>
+
+
+<style id="kb-header-clarity-fix">
+/* Keep the home title fully readable and all header actions visible. */
+.kb-maker-intro{display:none!important}
+header{display:grid!important;grid-template-columns:minmax(190px,1fr) auto;align-items:center!important;gap:12px!important;flex-wrap:nowrap!important;padding:9px 14px!important;min-width:0}
+.header-left{display:flex!important;align-items:center!important;gap:10px!important;min-width:0;flex-wrap:nowrap!important}
+.header-left .logo{display:flex!important;align-items:center!important;gap:7px!important;min-width:0;white-space:nowrap!important;font-size:20px!important}
+.brand-sub{display:none!important}
+.live-location-btn,.live-location-status{display:none!important}
+.signup-top{display:inline-flex!important;flex:0 0 auto!important;visibility:visible!important;opacity:1!important;white-space:nowrap!important;padding:9px 13px!important}
+.head-actions{display:flex!important;align-items:center!important;justify-content:flex-end!important;gap:6px!important;min-width:0;flex-wrap:nowrap!important;overflow:visible!important}
+.head-actions>*{flex:0 0 auto!important;min-width:0}
+.head-actions .utility-btn,.head-actions .profile-avatar-btn,.head-actions .cartbtn{min-height:38px!important;padding:5px 8px!important;font-size:12px!important;white-space:nowrap!important}
+.profile-avatar-img{width:27px!important;height:27px!important}
+.hero{padding:10px 0 8px!important;margin:0!important}
+.hero h1{font-size:clamp(25px,3.4vw,42px)!important;line-height:1.13!important;overflow-wrap:normal!important}
+.hero .w-v{white-space:nowrap!important;display:inline-block!important}
+@media(max-width:1000px){header{grid-template-columns:1fr!important;gap:8px!important}.header-left{justify-content:space-between!important}.head-actions{justify-content:flex-start!important;overflow-x:auto!important;padding-bottom:2px!important}.hero h1{font-size:clamp(24px,5vw,36px)!important}}
+@media(max-width:520px){header{padding:8px!important}.header-left .logo{font-size:18px!important}.head-actions .utility-btn,.head-actions .profile-avatar-btn,.head-actions .cartbtn{font-size:11px!important;padding:4px 6px!important}.signup-top{padding:7px 9px!important;font-size:12px!important}}
+
+/* Unique title-linked project artwork: larger floating object, depth, and animation per project card */
+.project-scene{position:relative;isolation:isolate;overflow:hidden;min-height:174px;background:radial-gradient(ellipse at 50% 45%,color-mix(in srgb,var(--c) 18%,transparent),transparent 68%)}
+.project-scene:before{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(135deg,rgba(255,255,255,.07),transparent 38%,rgba(0,0,0,.15));z-index:1}
+.project-scene .art{width:100%;height:174px;display:block;filter:drop-shadow(0 8px 14px color-mix(in srgb,var(--c) 28%,transparent));transition:transform .35s ease,filter .35s ease}
+.card:hover .project-scene .art{transform:perspective(700px) rotateX(3deg) scale(1.045);filter:drop-shadow(0 12px 18px color-mix(in srgb,var(--c) 42%,transparent))}
+.project-anime{position:absolute;z-index:2;right:13px;top:12px;display:grid;place-items:center;width:48px;height:48px;border:1px solid color-mix(in srgb,var(--c) 72%,white);border-radius:15px;background:color-mix(in srgb,var(--c) 25%,#061222);box-shadow:0 0 22px color-mix(in srgb,var(--c) 35%,transparent),inset 0 1px 0 #ffffff55;font-size:27px;animation:projectFloat 3.2s ease-in-out infinite}
+.scene-caption{position:absolute;z-index:2;left:10px;bottom:9px;padding:5px 9px;border:1px solid color-mix(in srgb,var(--c) 55%,transparent);border-radius:999px;background:#04101ddd;color:#eaf6ff;font-size:10px;font-weight:800;letter-spacing:.08em;backdrop-filter:blur(8px);max-width:calc(100% - 80px)}
+@keyframes projectFloat{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-5px) rotate(2deg)}}
+@media(prefers-reduced-motion:reduce){.project-anime,.project-scene .art{animation:none!important;transition:none!important}}
+</style>
+
+</body>
+</html>
