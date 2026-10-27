@@ -904,7 +904,7 @@ Object.keys(X).forEach(function(d){var n=50;X[d].forEach(function(blk,g){blk.spl
    razorpayKeyId: your Razorpay Key ID only (starts with rzp_test_ or rzp_live_). NEVER put the secret here. */
 /* Calls the backend and always returns JSON. Render's free plan sleeps and answers with an HTML page while it wakes up, so retry a couple of times. */
 async function kbFetchJson(url,opts){for(var i=0;i<3;i++){var res=await fetch(url,opts),t=await res.text();try{var d=JSON.parse(t);return {ok:res.ok,status:res.status,json:async function(){return d}}}catch(e){if(i<2)await new Promise(function(ok){setTimeout(ok,8000)})}}throw new Error('The KitBench server is waking up or not reachable. Please wait one minute and try again.')}
-var KB_SETTINGS={apiBase:"https://kitbench-api.onrender.com",razorpayKeyId:"rzp_test_ToGKKXdbV8RgND"};
+var KB_SETTINGS={apiBase:"https://kitbench-api.onrender.com",razorpayKeyId:"rzp_live_Tsw6h5tgde67kq"};
 window.KITBENCH_API_BASE=KB_SETTINGS.apiBase;
 var RZP={key:KB_SETTINGS.razorpayKeyId||"YOUR_RAZORPAY_KEY_ID",orderUrl:KB_SETTINGS.apiBase+"/api/create-order",verifyUrl:KB_SETTINGS.apiBase+"/api/verify-payment",shop:"KitBench"};
 function tot(){var t=0;Object.keys(cart).forEach(function(id){t+=cart[id]*K.filter(function(z){return z.id==id})[0].p});return t}
